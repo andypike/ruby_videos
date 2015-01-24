@@ -1,0 +1,32 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'config/initializers/*'
+    - 'config/environments/*'
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Style/IndentationWidth:
+  Width: 2
+
+Style/SingleSpaceBeforeFirstArg:
+  Exclude:
+    - spec/factories/**/*
+    - spec/features/**/*
+
+Style/FileName:
+  Exclude:
+    - '**/Gemfile'
+    - '**/Rakefile'
