@@ -13,6 +13,8 @@ language.
 git clone git@github.com:andypike/ruby_videos.git
 cd ruby_videos
 cp config/example.database.yml config/database.yml
+cp example.env .env
+  * Add your development details to .env
 psql postgres
 # create user ruby_videos with password '' CREATEDB;
 # \q
@@ -60,7 +62,7 @@ system and should be named using verbs. For example, `PlaceOrder`,
 `RegisterUser` or  `PublishArticle`. These classes should have no knowledge of
 HTTP or how to query the database. If they require data they can only call
 AR-model query methods are defined in the model class not built in AR calls such
-as `#where` etc. The only exception to this is `#find(id)`.
+as `#where` etc. The only exceptions to this is `#find(id)` or `#find_by`.
 
 If an Operation needs to update/insert then they can use the normal AR methods
 (`#create`, `#save`, `update`, etc).

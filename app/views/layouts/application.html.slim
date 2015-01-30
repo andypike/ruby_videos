@@ -10,4 +10,12 @@ html
     .container
       .row
         .col-md-12
+          - if current_user.authenticated?
+            p= link_to "Logout", session_path, :method => :delete
+          - else
+            p= link_to "Login with GitHub", "/auth/github"
+
+          p Logged in as #{current_user.name}
+
+          = render "flash"
           = yield
