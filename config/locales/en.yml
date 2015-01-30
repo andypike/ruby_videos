@@ -1,2 +1,4 @@
 en:
   login_success: "Successfully logged in!"
+  login_fail: "Unable to login"
+  logout_success: "Successfully logged out"
