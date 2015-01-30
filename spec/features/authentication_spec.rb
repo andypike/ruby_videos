@@ -4,22 +4,34 @@ RSpec.describe "Authentication" do
   before { visit root_path }
 
   describe "Logging in via GitHub" do
-    it "shows a success message" do
-      click_on "Login with GitHub"
+    context "with valid OmniAuth hash" do
+      it "shows a success message" do
+        click_on "Login with GitHub"
 
-      expect(page).to have_content(/successfully logged in/i)
+        expect(page).to have_content(/successfully logged in/i)
+      end
+
+      it "shows who is logged in" do
+        click_on "Login with GitHub"
+
+        expect(page).to have_content(/andy pike/i)
+      end
+
+      it "hides the login link" do
+        click_on "Login with GitHub"
+
+        expect(page).not_to have_link("Login with GitHub")
+      end
     end
 
-    it "shows who is logged in" do
-      click_on "Login with GitHub"
+    context "with invalid OmniAuth hash" do
+      before { OmniAuth.config.mock_auth[:github] = {} }
 
-      expect(page).to have_content(/andy pike/i)
-    end
+      it "shows a failure message" do
+        click_on "Login with GitHub"
 
-    it "hides the login link" do
-      click_on "Login with GitHub"
-
-      expect(page).not_to have_link("Login with GitHub")
+        expect(page).to have_content(/unable to login/i)
+      end
     end
   end
 
