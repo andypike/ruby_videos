@@ -4,7 +4,7 @@ class GuestUser
   end
 
   def id
-    :logged_out
+    :guest
   end
 
   def name
