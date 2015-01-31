@@ -1,0 +1,7 @@
+- if current_user.authenticated?
+  p= link_to "Logout", session_path, :method => :delete
+- else
+  p= link_to "Login with GitHub", "/auth/github"
+
+- if current_user.admin?
+  p= link_to "Presenters", presenters_path
