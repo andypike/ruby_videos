@@ -1,43 +1,42 @@
 require "rails_helper"
 
 RSpec.describe "Listing presenters" do
-  before { visit root_path }
+  before { home_page.open }
 
   context "as an admin" do
     it "displays presenters" do
       presenter = create(:presenter)
 
-      create(:admin)
-      click_on "Login with GitHub"
-      click_on "Presenters"
+      main_menu.login_as(:admin)
+      main_menu.presenters_link.click
 
       expect(page).to have_content(presenter.name)
     end
   end
 
   context "as a viewer" do
-    before { click_on "Login with GitHub" }
+    before { main_menu.login_as(:viewer) }
 
     it "hides the menu option" do
-      expect(page).not_to have_link("Presenters")
+      expect(main_menu.presenters_link).not_to be_present
     end
 
     it "disallows direct access" do
-      visit presenters_path
+      presenters_page.open
 
-      expect(page).to have_content(/not authorised/i)
+      expect(current_page.accessed_denied_message).to be_present
     end
   end
 
   context "as a guest" do
     it "hides the menu option" do
-      expect(page).not_to have_link("Presenters")
+      expect(main_menu.presenters_link).not_to be_present
     end
 
     it "disallows direct access" do
-      visit presenters_path
+      presenters_page.open
 
-      expect(page).to have_content(/not authorised/i)
+      expect(current_page.accessed_denied_message).to be_present
     end
   end
 end
