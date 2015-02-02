@@ -28,16 +28,16 @@ rails s
 
 I wanted a simple project that I could experiment around with and try out some
 different things. There is also a [Trailblazer version](https://github.com/andypike/ruby_videos_trailblazer)
-of this project that I start first. The reason for this project is that I liked
+of this project that I started first. The reason for this project is that I liked
 many on the concepts in [Trailblazer](https://github.com/apotonick/trailblazer)
 but also wondered if I could do something similar with just standard Rails and
-POROs (with a few other gems).
+POROs (with a few lightweight gems).
 
 ### Responsibilities
 
-Based on the Trailblazer experiments and some other things I've been thinking
-and reading about. Here are the general principles, structure responsibilities
-of the different areas of the project. These are idea's and plans before I start
+Based on the Trailblazer experiment and some other things I've been thinking
+and reading about, here are the general principles, structure responsibilities
+of the different areas of the project. These are ideas and plans before I start
 building the app. These may change over time.
 
 #### Controllers
@@ -62,7 +62,7 @@ system and should be named using verbs. For example, `PlaceOrder`,
 `RegisterUser` or  `PublishArticle`. These classes should have no knowledge of
 HTTP or how to query the database. If they require data they can only call
 AR-model query methods are defined in the model class not built in AR calls such
-as `#where` etc. The only exceptions to this is `#find(id)` or `#find_by`.
+as `#where` etc. The only exceptions to this are `#find(id)` or `#find_by`.
 
 If an Operation needs to update/insert then they can use the normal AR methods
 (`#create`, `#save`, `update`, etc).
@@ -74,7 +74,7 @@ have to be mapped to your AR models but they can be.
 #### Form Objects
 
 These objects are responsible for dealing with data input from a user. They will
-be populated form the params hash and will validate it. I would like to keep
+be populated from the params hash and will validate it. I would like to keep
 these as close to simple POROs but I suspect I'll use a gem here which will make
 it easier to integrate with form builders such as [simple_form](https://github.com/plataformatec/simple_form).
 
