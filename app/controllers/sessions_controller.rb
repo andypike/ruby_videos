@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
     info = Authentication::OmniAuthInfo.new(env["omniauth.auth"])
 
     Authentication::LoginWithOmniAuth.new(info)
-      .on(:success) { |user| set_current_user(user, :login_success) }
-      .on(:fail)    { redirect_to root_path, :alert => t(:login_fail) }
+      .on(:ok)   { |user| set_current_user(user, :login_success) }
+      .on(:fail) { redirect_to root_path, :alert => t(:login_fail) }
       .call
   end
 

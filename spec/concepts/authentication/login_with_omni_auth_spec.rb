@@ -46,8 +46,8 @@ RSpec.describe Authentication::LoginWithOmniAuth do
           )
         end
 
-        it "publishes the :success event" do
-          expect(listener).to have_received(:success).with(user)
+        it "publishes the :ok event" do
+          expect(listener).to have_received(:ok).with(user)
         end
       end
     end
@@ -59,10 +59,10 @@ RSpec.describe Authentication::LoginWithOmniAuth do
         expect { subject.call }.not_to change(User, :count)
       end
 
-      it "publishes the :success event" do
+      it "publishes the :ok event" do
         subject.call
 
-        expect(listener).to have_received(:success).with(user)
+        expect(listener).to have_received(:ok).with(user)
       end
     end
   end

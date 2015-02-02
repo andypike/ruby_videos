@@ -10,13 +10,13 @@ module PageObjects
     def find(selector, options)
       context.find(selector, options)
     rescue
-      nil
+      MissingElement.new(:element, selector, options)
     end
 
     def find_link(label)
       context.find_link(label)
     rescue
-      nil
+      MissingElement.new(:link, label)
     end
 
     def respond_to_missing?(name, _)
