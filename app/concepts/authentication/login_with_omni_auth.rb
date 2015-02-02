@@ -11,7 +11,7 @@ module Authentication
     def call
       if info.valid?
         user = find_or_create_user
-        publish(:success, user)
+        publish(:ok, user)
       else
         publish(:fail)
       end

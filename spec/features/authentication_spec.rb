@@ -1,26 +1,22 @@
 require "rails_helper"
 
 RSpec.describe "Authentication" do
-  before { visit root_path }
+  before { home_page.open }
 
   describe "Logging in via GitHub" do
     context "with valid OmniAuth hash" do
-      it "shows a success message" do
-        click_on "Login with GitHub"
+      before { main_menu.login_as(:visitor) }
 
+      it "shows a success message" do
         expect(page).to have_content(/successfully logged in/i)
       end
 
       it "shows who is logged in" do
-        click_on "Login with GitHub"
-
         expect(page).to have_content(/andy pike/i)
       end
 
       it "hides the login link" do
-        click_on "Login with GitHub"
-
-        expect(page).not_to have_link("Login with GitHub")
+        expect(main_menu.login_link).not_to be_present
       end
     end
 
@@ -28,7 +24,7 @@ RSpec.describe "Authentication" do
       before { OmniAuth.config.mock_auth[:github] = {} }
 
       it "shows a failure message" do
-        click_on "Login with GitHub"
+        main_menu.login_as(:visitor)
 
         expect(page).to have_content(/unable to login/i)
       end
@@ -37,14 +33,14 @@ RSpec.describe "Authentication" do
 
   describe "Logging out" do
     it "allows logged in users to logout" do
-      click_on "Login with GitHub"
-      click_on "Logout"
+      main_menu.login_as(:visitor)
+      main_menu.logout_link.click
 
       expect(page).to have_content(/successfully logged out/i)
     end
 
     it "hides the logout link" do
-      expect(page).not_to have_link("Logout")
+      expect(main_menu.logout_link).not_to be_present
     end
   end
 end

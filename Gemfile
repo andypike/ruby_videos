@@ -9,7 +9,10 @@ gem "jquery-rails"
 gem "slim"
 gem "omniauth-github", "~> 1.1.2"
 gem "wisper"
-gem "simple_form_object"
+gem "simple_form_object",
+  :github => "andypike/simple_form_object",
+  :branch => "rails_4_2"
+gem "simple_form",     "~> 3.1.0"
 
 group :development, :test do
   gem "web-console", "~> 2.0"
