@@ -1,5 +1,9 @@
-h1 Add Presenter
+.page#add-presenter
+  .container.container-intro
+    .row
+      .col-md-12
+        h1 Add Presenter
 
-= simple_form_for @form do |f|
-  = f.input :name
-  = f.submit "Save"
+        = simple_form_for @form do |f|
+          = f.input :name
+          = f.submit "Save"

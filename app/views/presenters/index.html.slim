@@ -1,6 +1,10 @@
-h1 Presenters
+.page#list-presenters
+  .container.container-intro
+    .row
+      .col-md-12
+        h1 Presenters
 
-= link_to "Add", new_presenter_path
+        = link_to "Add", new_presenter_path
 
-- @presenters.each do |presenter|
-  p= presenter.name
+        - @presenters.each do |presenter|
+          p= presenter.name

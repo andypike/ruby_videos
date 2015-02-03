@@ -1,7 +1,13 @@
-- if current_user.authenticated?
-  p= link_to "Logout", session_path, :method => :delete
-- else
-  p= link_to "Login with GitHub", "/auth/github"
+ul.nav.navbar-nav.navbar-right
+  li= smooth_link_to "Home", "home"
+  li= smooth_link_to "Latest", "latest"
+  li= smooth_link_to "Featuring", "featuring"
+  li= smooth_link_to "Contact", "contact"
 
-- if current_user.admin?
-  p= link_to "Presenters", presenters_path
+  - if current_user.admin?
+    li= link_to "Presenters", presenters_path
+
+  - if current_user.authenticated?
+    li= link_to "Logout", session_path, :method => :delete
+  - else
+    li= link_to "Login with GitHub", "/auth/github"

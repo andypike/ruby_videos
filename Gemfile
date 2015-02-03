@@ -13,6 +13,7 @@ gem "simple_form_object",
   :github => "andypike/simple_form_object",
   :branch => "rails_4_2"
 gem "simple_form",     "~> 3.1.0"
+gem "bootstrap-sass",  "~> 3.3.3"
 
 group :development, :test do
   gem "web-console", "~> 2.0"
