@@ -14,5 +14,6 @@ module RubyVideos
   class Application < Rails::Application
     config.active_record.raise_in_transactional_callbacks = true
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
   end
 end

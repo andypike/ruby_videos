@@ -1,1 +1,160 @@
-h1 Ruby Videos
+#home
+  .bg-intro
+    .container.container-intro
+      .row-intro.row
+        .col-sm-5.col-xs-12
+          h1.title-intro.animated.fadeInDown Ruby Videos
+          h2.subtitle-intro.animated.fadeInLeft A curated listing of quality videos about or related to the Ruby programming language.
+          .btn-delay.animated.fadeInUp
+            a.btn.btn-white.scroll-smooth href="#features" Suggest a Video
+        .col-browser.col-sm-7.col-xs-12
+          .col-sl.animated.fadeInDown
+            = image_tag "browser-slider/browser.png", :class => "img-browser"
+            .wrapper-sl.wrapper-browser
+              ul#slider-intro.slider
+                li= image_tag "browser-slider/652x340.gif"
+                li= image_tag "browser-slider/652x340.gif"
+              .wrapper-nav
+                .div-p.div-p-browser
+                  i#p-intro
+                .div-n.div-n-browser
+                  i#n-intro
+#latest
+  .bg-portfolio
+    .container
+      .row
+        .col-sm-12
+          h1.header-title LATEST VIDEOS
+          h2.subtitle Check out the latest videos added to the collection
+          hr.hr-portfolio
+      .row
+        ul.ul-portfolio
+          li.filter.wow.fadeInLeft data-filter="all"
+            | ALL
+          li.filter.wow.fadeInUp data-filter="testing" data-wow-delay="0.2s"
+            | TESTING
+          li.filter.wow.fadeInDown data-filter="perf" data-wow-delay="0.3s"
+            | PERFORMANCE
+          li.filter.wow.fadeInRight data-filter="web-design"
+            | SECURITY
+      #Grid.row
+        .mix.testing.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.nivoz data-lightbox-gallery="testing" href="images/portfolio/1280x800.gif" title="This is an image title"
+                span.glyphicon.glyphicon-play
+        .mix.web-design.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.nivoz data-lightbox-gallery="design" href="images/portfolio/1280x800.gif" title="This is an image title"
+                span.glyphicon.glyphicon-play
+        .mix.perf.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.perf href="images/portfolio/1280x800.gif" title="This is a video title"
+                span.glyphicon.glyphicon-play
+        .mix.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.nivoz href="images/portfolio/1280x800.gif" title="This is an image title"
+                span.glyphicon.glyphicon-play
+        .mix.web-design.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.nivoz data-lightbox-gallery="design" href="images/portfolio/1280x800.gif" title="This is an image title"
+                span.glyphicon.glyphicon-play
+        .mix.web-design.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.nivoz data-lightbox-gallery="gallery-1" href="images/portfolio/1280x800.gif" title="This is an image title"
+                span.glyphicon.glyphicon-play
+        .mix.testing.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.nivoz data-lightbox-gallery="testing" href="images/portfolio/1280x800.gif" title="This is an image title"
+                span.glyphicon.glyphicon-play
+        .mix.testing.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.nivoz data-lightbox-gallery="testing" href="images/portfolio/1280x800.gif" title="This is an image title"
+                span.glyphicon.glyphicon-play
+        .mix.web-design.all.col-sm-4
+          .img-wrapper
+            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+            .bg-img-portfolio
+            .lightbox-wrapper
+              a.nivoz data-lightbox-gallery="design" href="images/portfolio/1280x800.gif" title="This is an image title"
+                span.glyphicon.glyphicon-play
+.bg-quote
+  .container
+    .row-quote.row
+      .col-md-12.wow.fadeInUp
+        h5
+          i.fa.fa-quote-left
+          | Ruby Videos is a great way for Ruby developers to keep up to date with the latest quality videos.
+          i.fa.fa-quote-right
+#featuring
+  .bg-team
+    .container
+      .row
+        .col-sm-12.wow.fadeInUp data-wow-delay="0.2s"
+          h1.header-title FEATURING
+          h2.subtitle Including videos from these presenters
+          hr
+      .row.row-team
+        .col-team.col-sm-4.wow.pulse
+          .wrapper-team-pic
+            = image_tag "team/team-1.jpg", :class => "img-team"
+            .team-hover-bg
+            a href="#"
+              i.fa.fa-twitter.team-icon.team-t
+            a href="#"
+              i.fa.fa-github.team-icon.team-d
+          h2.team-title Andy Pike
+          h3.team-subtitle Technical Director
+#contact
+  .bg-contact.grey
+    .container-contact.container
+      .row
+        .col-sm-12
+          h1.header-title.wow.fadeInLeft CONTACT US
+          h2.subtitle.wow.fadeInRight Feel free to contact us anytime!
+          hr.hr-contact
+      .row-contact.row
+        .col-sm-12
+          .row.wow.fadeInUp
+            form#ajax_form.form-contact action="email.php" method="POST" role="form"
+              .col-sm-12
+                .form-group
+                  input#name.form-control.form-flat name="name" placeholder="Name" type="text"
+              .col-sm-12
+                .form-group
+                  input#email.form-control.form-flat name="email" placeholder="Email" type="text"
+              .col-sm-12
+                .form-group
+                  textarea#message.form-control.form-flat name="message"
+                button.submit.btn.btn-flat type="submit" Submit
+.bg-subscribe
+  .container-subscribe.container
+    .row-subscribe.row
+      .col-subscribe.col-sm-8.col-sm-offset-2.wow.fadeInRight
+        input.form-control.form-flat.subscribe-mail.hidden-xs placeholder="Add your email address" type="email"
+        input.form-control.form-flat.subscribe-mail.visible-xs type="email"
+        a.btn.btn-flat href="#" SUBSCRIBE
+
