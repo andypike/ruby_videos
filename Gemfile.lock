@@ -83,6 +83,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     codeclimate-test-reporter (0.4.3)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
@@ -284,6 +289,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (~> 3.3.3)
   capybara (~> 2.4.4)
+  carrierwave
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   dotenv-rails
