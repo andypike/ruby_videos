@@ -45,11 +45,16 @@ RSpec.describe "Adding a presenter" do
   before { home_page.open }
 
   context "as an admin" do
+    before do
+      main_menu.login_as(:admin)
+      main_menu.presenters_link.click
+      presenters_page.add_link.click
+    end
+
     context "with valid data" do
-      it "allows presenters to be added" do # TODO: Refactor these specs to remove duplication
-        main_menu.login_as(:admin)
-        main_menu.presenters_link.click
-        presenters_page.add_link.click
+      let(:presenter) { Presenter.last }
+
+      it "allows presenters to be added" do
         add_presenter_page.fill_in_form
 
         expect do
@@ -58,27 +63,28 @@ RSpec.describe "Adding a presenter" do
 
         expect(page).to have_content(/successfully added presenter/i)
         expect(page).to have_content("Sandi Metz")
+        expect(presenter).to have_attributes(
+          :name    => "Sandi Metz",
+          :twitter => "sandimetz",
+          :github  => "torqueforge",
+          :website => "www.sandimetz.com",
+          :title   => "Author of POODR",
+          :bio     => "Cyclist, Rubyist, reluctant author (poodr.com)."
+        )
+        expect(presenter.photo.url).to include("photo.jpg")
       end
     end
 
     context "with invalid data" do
       it "shows error messages" do
-        main_menu.login_as(:admin)
-        main_menu.presenters_link.click
-        presenters_page.add_link.click
         add_presenter_page.fill_in_form(:name => "")
-
         add_presenter_page.submit_button.click
 
         expect(page).to have_content(/can't be blank/i)
       end
 
       it "populates the form with submitted values" do
-        main_menu.login_as(:admin)
-        main_menu.presenters_link.click
-        presenters_page.add_link.click
         add_presenter_page.fill_in_form(:name => "x" * 256)
-
         add_presenter_page.submit_button.click
 
         expect(add_presenter_page.name_field).to eq("x" * 256)
