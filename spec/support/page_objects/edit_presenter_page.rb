@@ -1,3 +1,5 @@
+require_relative "add_presenter_page"
+
 module PageObjects
   class EditPresenterPage < AddPresenterPage
     def open(presenter)
