@@ -8,11 +8,11 @@ class CRUD
   end
 
   def call
-    mapper = AutoMapper.new(form, model)
-
     if form.valid?
-      mapper.to_model.save
-      publish(:ok, mapper.model)
+      AutoMapper.new(form).map_to(model).tap do |m|
+        m.save
+        publish(:ok, m)
+      end
     else
       publish(:fail)
     end

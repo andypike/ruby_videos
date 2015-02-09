@@ -1,23 +1,14 @@
 class AutoMapper
-  attr_reader :form, :model
+  attr_reader :source
 
-  def initialize(form, model)
-    @form  = form
-    @model = model
+  def initialize(source)
+    @source = source
   end
 
-  def to_model
-    model.tap do |m|
-      form.attributes.each do |attribute, value|
-        m.public_send("#{attribute}=", value) if m.respond_to?(attribute)
-      end
-    end
-  end
-
-  def to_form
-    form.tap do |f|
-      model.attributes.each do |attribute, value|
-        f.public_send("#{attribute}=", value) if f.respond_to?(attribute)
+  def map_to(destination)
+    destination.tap do |d|
+      source.attributes.each do |attribute, value|
+        d.public_send("#{attribute}=", value) if d.respond_to?(attribute)
       end
     end
   end

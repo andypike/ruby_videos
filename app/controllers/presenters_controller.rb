@@ -22,7 +22,7 @@ class PresentersController < ApplicationController
     @form     = Presenters::Form.build_from(:presenter, params)
     presenter = Presenter.find(@form.id)
 
-    AutoMapper.new(@form, presenter).to_form
+    AutoMapper.new(presenter).map_to(@form)
   end
 
   def update
