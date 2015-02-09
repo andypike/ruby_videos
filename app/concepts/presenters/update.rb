@@ -1,5 +1,5 @@
 module Presenters
-  class Create
+  class Update
     include Wisper::Publisher
 
     attr_reader :form
@@ -9,7 +9,8 @@ module Presenters
     end
 
     def call
-      presenter = Presenter.new
+      # TODO: Refactor this and the create operation as they are virtually the same
+      presenter = Presenter.find(form.id)
       mapper = AutoMapper.new(form, presenter)
 
       if form.valid?

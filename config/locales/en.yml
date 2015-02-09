@@ -3,4 +3,5 @@ en:
   login_fail: "Unable to login"
   logout_success: "Successfully logged out"
   not_authorised: "You are not authorised to view this page"
-  added_presenter: "Successfully added presenter"
+  created_presenter: "Successfully added presenter"
+  updated_presenter: "Successfully edited presenter"

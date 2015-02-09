@@ -8,3 +8,4 @@
 
         - @presenters.each do |presenter|
           p= presenter.name
+          p= link_to "Edit", edit_presenter_path(presenter)
