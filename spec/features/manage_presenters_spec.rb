@@ -14,30 +14,9 @@ RSpec.describe "Listing presenters" do
     end
   end
 
-  context "as a viewer" do
-    before { main_menu.login_as(:viewer) }
-
-    it "hides the menu option" do
-      expect(main_menu.presenters_link).not_to be_present
-    end
-
-    it "disallows direct access" do
-      presenters_page.open
-
-      expect(current_page.accessed_denied_message).to be_present
-    end
-  end
-
-  context "as a guest" do
-    it "hides the menu option" do
-      expect(main_menu.presenters_link).not_to be_present
-    end
-
-    it "disallows direct access" do
-      presenters_page.open
-
-      expect(current_page.accessed_denied_message).to be_present
-    end
+  it_should_behave_like "an admin only page with menu" do
+    let(:open) { presenters_page.open }
+    let(:menu) { main_menu.presenters_link }
   end
 end
 
@@ -92,22 +71,8 @@ RSpec.describe "Adding a presenter" do
     end
   end
 
-  context "as a viewer" do
-    before { main_menu.login_as(:viewer) }
-
-    it "disallows direct access" do
-      add_presenter_page.open
-
-      expect(current_page.accessed_denied_message).to be_present
-    end
-  end
-
-  context "as a guest" do
-    it "disallows direct access" do
-      add_presenter_page.open
-
-      expect(current_page.accessed_denied_message).to be_present
-    end
+  it_should_behave_like "an admin only page" do
+    let(:open) { add_presenter_page.open }
   end
 end
 
@@ -158,22 +123,7 @@ RSpec.describe "Edit a presenter" do
     end
   end
 
-  # TODO: Refactor to a shared example
-  context "as a viewer" do
-    before { main_menu.login_as(:viewer) }
-
-    it "disallows direct access" do
-      edit_presenter_page.open(presenter)
-
-      expect(current_page.accessed_denied_message).to be_present
-    end
-  end
-
-  context "as a guest" do
-    it "disallows direct access" do
-      edit_presenter_page.open(presenter)
-
-      expect(current_page.accessed_denied_message).to be_present
-    end
+  it_should_behave_like "an admin only page" do
+    let(:open) { edit_presenter_page.open(presenter) }
   end
 end

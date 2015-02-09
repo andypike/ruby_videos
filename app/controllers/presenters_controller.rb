@@ -34,4 +34,3 @@ class PresentersController < ApplicationController
       .call
   end
 end
-
