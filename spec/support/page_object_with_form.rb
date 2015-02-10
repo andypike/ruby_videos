@@ -1,8 +1,8 @@
 module PageObjects
   class PageObjectWithForm < PageObject
     def fill_in_form(overrides = {})
-      populate(defaults)
-      populate(overrides)
+      attributes = defaults.merge(overrides)
+      populate(attributes)
     end
 
     def field(attribute)
