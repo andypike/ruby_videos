@@ -37,18 +37,13 @@ RSpec.describe "Adding a presenter" do
         add_presenter_page.fill_in_form
 
         expect do
-          add_presenter_page.submit_button.click
+          add_presenter_page.submit_form
         end.to change(Presenter, :count).by(1)
 
         expect(page).to have_content(/successfully added presenter/i)
         expect(page).to have_content("Sandi Metz")
         expect(presenter).to have_attributes(
-          :name    => "Sandi Metz",
-          :twitter => "sandimetz",
-          :github  => "torqueforge",
-          :website => "www.sandimetz.com",
-          :title   => "Author of POODR",
-          :bio     => "Cyclist, Rubyist, reluctant author (poodr.com)."
+          add_presenter_page.defaults.except(:photo)
         )
         expect(presenter.photo.url).to include("photo.jpg")
       end
@@ -57,16 +52,16 @@ RSpec.describe "Adding a presenter" do
     context "with invalid data" do
       it "shows error messages" do
         add_presenter_page.fill_in_form(:name => "")
-        add_presenter_page.submit_button.click
+        add_presenter_page.submit_form
 
         expect(page).to have_content(/can't be blank/i)
       end
 
       it "populates the form with submitted values" do
         add_presenter_page.fill_in_form(:name => "x" * 256)
-        add_presenter_page.submit_button.click
+        add_presenter_page.submit_form
 
-        expect(add_presenter_page.name_field).to eq("x" * 256)
+        expect(add_presenter_page.field(:name)).to eq("x" * 256)
       end
     end
   end
@@ -90,14 +85,14 @@ RSpec.describe "Edit a presenter" do
 
     context "with valid data" do
       it "populates the form" do
-        expect(edit_presenter_page.name_field).to eq("Bob Smith")
+        expect(edit_presenter_page.field(:name)).to eq("Bob Smith")
       end
 
       it "allows the presenter to be updated" do
         edit_presenter_page.fill_in_form(:name => "Edited Name")
 
         expect do
-          edit_presenter_page.submit_button.click
+          edit_presenter_page.submit_form
         end.not_to change(Presenter, :count)
 
         expect(page).to have_content(/successfully edited presenter/i)
@@ -109,16 +104,16 @@ RSpec.describe "Edit a presenter" do
     context "with invalid data" do
       it "shows error messages" do
         edit_presenter_page.fill_in_form(:name => "")
-        edit_presenter_page.submit_button.click
+        edit_presenter_page.submit_form
 
         expect(page).to have_content(/can't be blank/i)
       end
 
       it "populates the form with submitted values" do
         edit_presenter_page.fill_in_form(:name => "x" * 256)
-        edit_presenter_page.submit_button.click
+        edit_presenter_page.submit_form
 
-        expect(edit_presenter_page.name_field).to eq("x" * 256)
+        expect(edit_presenter_page.field(:name)).to eq("x" * 256)
       end
     end
   end

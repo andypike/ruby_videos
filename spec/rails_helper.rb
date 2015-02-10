@@ -7,6 +7,7 @@ require "capybara/rails"
 require "capybara/rspec"
 
 require "support/page_object"
+require "support/page_object_with_form"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
