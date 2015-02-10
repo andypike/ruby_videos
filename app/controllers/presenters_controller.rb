@@ -11,10 +11,9 @@ class PresentersController < ApplicationController
   end
 
   def create
-    Presenters::Create.new(@form)
-      .on(:ok) { redirect_to presenters_path, :notice => t(:created_presenter) }
-      .on(:fail) { render :new }
-      .call
+    run :operation => Presenters::Create,
+        :ok_notice => t(:created_presenter),
+        :fail_view => :new
   end
 
   def edit
@@ -24,15 +23,25 @@ class PresentersController < ApplicationController
   end
 
   def update
-    Presenters::Update.new(@form)
-      .on(:ok) { redirect_to presenters_path, :notice => t(:updated_presenter) }
-      .on(:fail) { render :edit }
-      .call
+    run :operation => Presenters::Update,
+        :ok_notice => t(:updated_presenter),
+        :fail_view => :edit
   end
 
   private
 
   def build_form
     @form = Presenters::Form.build_from(:presenter, params)
+  end
+
+  def run(options)
+    operation = options.fetch(:operation)
+    fail_view = options.fetch(:fail_view)
+    ok_notice = options.fetch(:ok_notice)
+
+    operation.new(@form)
+      .on(:ok)   { redirect_to presenters_path, :notice => ok_notice }
+      .on(:fail) { render fail_view }
+      .call
   end
 end
