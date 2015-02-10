@@ -1,5 +1,6 @@
 class PresentersController < ApplicationController
   before_action :ensure_admin
+  before_action :build_form, :only => %i(create edit update)
 
   def index
     @presenters = Presenter.ordered
@@ -10,27 +11,37 @@ class PresentersController < ApplicationController
   end
 
   def create
-    @form = Presenters::Form.build_from(:presenter, params)
-
-    Presenters::Create.new(@form)
-      .on(:ok)   { redirect_to presenters_path, :notice => t(:created_presenter) }
-      .on(:fail) { render :new }
-      .call
+    run :operation => Presenters::Create,
+        :ok_notice => t(:created_presenter),
+        :fail_view => :new
   end
 
   def edit
-    @form     = Presenters::Form.build_from(:presenter, params)
     presenter = Presenter.find(@form.id)
 
     AutoMapper.new(presenter).map_to(@form)
   end
 
   def update
-    @form = Presenters::Form.build_from(:presenter, params)
+    run :operation => Presenters::Update,
+        :ok_notice => t(:updated_presenter),
+        :fail_view => :edit
+  end
 
-    Presenters::Update.new(@form)
-      .on(:ok)   { redirect_to presenters_path, :notice => t(:updated_presenter) }
-      .on(:fail) { render :edit }
+  private
+
+  def build_form
+    @form = Presenters::Form.build_from(:presenter, params)
+  end
+
+  def run(options)
+    operation = options.fetch(:operation)
+    fail_view = options.fetch(:fail_view)
+    ok_notice = options.fetch(:ok_notice)
+
+    operation.new(@form)
+      .on(:ok)   { redirect_to presenters_path, :notice => ok_notice }
+      .on(:fail) { render fail_view }
       .call
   end
 end
