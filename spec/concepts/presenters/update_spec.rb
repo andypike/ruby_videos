@@ -1,31 +1,32 @@
 require "rails_helper"
 
-RSpec.describe Presenters::Create do
+RSpec.describe Presenters::Update do
   let(:listener)  { double.as_null_object }
-  let(:presenter) { Presenter.first }
+  let(:presenter) { create(:presenter) }
   let(:form)      { Presenters::Form.build_from(:presenter, params) }
   let(:params) do
     {
+      :id => presenter.id,
       :presenter => { :name => name }
     }
   end
 
-  subject { Presenters::Create.new(form) }
+  subject { Presenters::Update.new(form) }
 
   before { subject.subscribe(listener) }
 
   context "with valid form" do
     let(:name) { "Andy" }
 
-    it "creates a new presenter" do
-      expect { subject.call }.to change(Presenter, :count).by(1)
+    it "doesn't create a new presenter" do
+      expect { subject.call }.not_to change(Presenter, :count)
     end
 
     describe "it also" do
       before { subject.call }
 
       it "sets the presenter's attributes" do
-        expect(presenter).to have_attributes(
+        expect(presenter.reload).to have_attributes(
           :name  => "Andy"
         )
       end
@@ -45,8 +46,10 @@ RSpec.describe Presenters::Create do
       expect(listener).to have_received(:fail)
     end
 
-    it "doesn't create a new presenter" do
-      expect { subject.call }.not_to change(Presenter, :count)
+    it "doesn't sets the presenter's attributes" do
+      expect(presenter.reload).to have_attributes(
+        :name  => "Bob Smith"
+      )
     end
   end
 end

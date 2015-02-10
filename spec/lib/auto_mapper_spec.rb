@@ -4,7 +4,7 @@ RSpec.describe AutoMapper do
   let(:form)  { FakeForm.new(:name => "Megan", :age => 7) }
   let(:model) { FakeModel.new(:name => "", :age => 0) }
 
-  subject { AutoMapper.new(form, model) }
+  subject { AutoMapper.new(form) }
 
   class FakeForm
     include SimpleFormObject
@@ -20,13 +20,13 @@ RSpec.describe AutoMapper do
     attribute :age
   end
 
-  describe "#to_model" do
-    it "returns the model passed in the constructor" do
-      expect(subject.to_model).to eq(model)
+  describe "#map_to" do
+    it "returns the object passed in" do
+      expect(subject.map_to(model)).to eq(model)
     end
 
-    it "maps attributes with matching names overwriting current values" do
-      expect(subject.to_model).to have_attributes(
+    it "replaces attribute values" do
+      expect(subject.map_to(model)).to have_attributes(
         :name => form.name,
         :age  => form.age
       )

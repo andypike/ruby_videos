@@ -1,7 +1,5 @@
 module Presenters
-  class Form
-    include SimpleFormObject
-
+  class Form < FormObject
     route_as :presenter
 
     attribute :name,    :string, :default => ""
