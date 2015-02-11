@@ -1,7 +1,9 @@
-require_relative "add_presenter_page"
+require_relative "presenter_form"
 
 module PageObjects
-  class EditPresenterPage < AddPresenterPage
+  class EditPresenterPage < PageObjectWithForm
+    include PresenterForm
+
     def open(presenter)
       visit edit_presenter_path(presenter)
     end

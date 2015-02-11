@@ -7,7 +7,7 @@ module PageObjects
       @context = context
     end
 
-    def find(selector, options)
+    def find(selector, options = {})
       context.find(selector, options)
     rescue
       MissingElement.new(:element, selector, options)
