@@ -12,10 +12,28 @@ RSpec.describe Presenter do
   end
 
   describe "#random" do
-    it "returns a random number of presenters" do
-      create_list(:presenter, 5)
+    subject { described_class.random(3) }
 
-      expect(described_class.random(3)).to have(3).items
+    context "more presenters exist than maximum specified" do
+      it "returns maximum number of presenters" do
+        create_list(:presenter, 5)
+
+        expect(subject).to have(3).items
+      end
+    end
+
+    context "no presenters exist" do
+      it "returns no presenters" do
+        expect(subject).to have(0).items
+      end
+    end
+
+    context "less presenters exist than maximum specified" do
+      it "returns all presenters" do
+        create_list(:presenter, 2)
+
+        expect(subject).to have(2).items
+      end
     end
   end
 end
