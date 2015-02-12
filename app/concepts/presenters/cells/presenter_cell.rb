@@ -5,10 +5,18 @@ module Presenters
         render
       end
 
+      def list
+        render
+      end
+
       private
 
       def name
         model.name
+      end
+
+      def bio
+        model.bio
       end
 
       def title
@@ -25,6 +33,18 @@ module Presenters
 
       def github_url
         "http://github.com/#{model.github}"
+      end
+
+      def edit_path
+        edit_presenter_path(model)
+      end
+
+      def videos
+        "99 Videos"
+      end
+
+      def current_user
+        parent_controller.current_user
       end
     end
   end

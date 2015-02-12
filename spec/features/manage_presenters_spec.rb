@@ -3,20 +3,14 @@ require "rails_helper"
 RSpec.describe "Listing presenters" do
   before { home_page.open }
 
-  context "as an admin" do
+  context "any user" do
     it "displays presenters" do
       presenter = create(:presenter)
 
-      main_menu.login_as(:admin)
-      main_menu.presenters_link.click
+      home_page.presenters_link.click
 
       expect(page).to have_content(presenter.name)
     end
-  end
-
-  it_should_behave_like "an admin only page with menu" do
-    let(:open) { presenters_page.open }
-    let(:menu) { main_menu.presenters_link }
   end
 end
 
@@ -26,7 +20,7 @@ RSpec.describe "Adding a presenter" do
   context "as an admin" do
     before do
       main_menu.login_as(:admin)
-      main_menu.presenters_link.click
+      home_page.presenters_link.click
       presenters_page.add_link.click
     end
 
@@ -79,7 +73,7 @@ RSpec.describe "Edit a presenter" do
   context "as an admin" do
     before do
       main_menu.login_as(:admin)
-      main_menu.presenters_link.click
+      home_page.presenters_link.click
       presenters_page.edit_link.click
     end
 

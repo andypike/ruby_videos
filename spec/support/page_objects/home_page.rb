@@ -7,6 +7,10 @@ module PageObjects
     def presenters
       all(".presenter")
     end
+
+    def presenters_link
+      find_link("See all presenters")
+    end
   end
 
   def home_page

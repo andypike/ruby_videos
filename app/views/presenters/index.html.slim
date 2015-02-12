@@ -1,11 +1,12 @@
 .page#list-presenters
   .container.container-intro
     .row
-      .col-md-12
+      .col-md-12.list-header
         h1 Presenters
 
-        = link_to "Add", new_presenter_path
+        - if current_user.admin?
+          = link_to "Add", new_presenter_path, :class => "btn btn-flat"
 
-        - @presenters.each do |presenter|
-          p= presenter.name
-          p= link_to "Edit", edit_presenter_path(presenter)
+    = cell("presenters/cells/presenter",
+      :collection => @presenters,
+      :method => :list)

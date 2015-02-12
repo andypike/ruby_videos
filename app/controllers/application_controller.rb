@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
 
   CURRENT_USER_KEY = :user_id
 
-  private
-
   def current_user
     if session[CURRENT_USER_KEY].present?
       @current_user ||= User.find_by(:id => session[CURRENT_USER_KEY])
@@ -13,6 +11,8 @@ class ApplicationController < ActionController::Base
 
     @current_user || GuestUser.new
   end
+
+  private
 
   def set_current_user(user, notice)
     session[CURRENT_USER_KEY] = user.id
