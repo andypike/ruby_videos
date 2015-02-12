@@ -24,6 +24,15 @@ GIT
       pry-stack_explorer (~> 0.4.9)
       railties (>= 3.0, < 5.0)
 
+GIT
+  remote: git://github.com/trailblazer/cells-slim.git
+  revision: 102c38a60591c2c2f992c4515887e5ed91d99880
+  specs:
+    cells-slim (0.0.1)
+      cells (~> 4.0.0.alpha1)
+      slim (~> 3.0)
+      tilt (>= 1.4.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,6 +97,11 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    cells (4.0.0.beta2)
+      actionpack (>= 3.2)
+      disposable (~> 0.0.8)
+      tilt (>= 1.4, < 3)
+      uber (~> 0.0.9)
     codeclimate-test-reporter (0.4.3)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
@@ -105,6 +119,9 @@ GEM
     debugger-linecache (1.2.0)
     diff-lcs (1.2.5)
     diffy (3.0.7)
+    disposable (0.0.9)
+      representable (~> 2.0)
+      uber
     docile (1.1.5)
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
@@ -189,6 +206,8 @@ GEM
     pry-stack_explorer (0.4.9.1)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
+    quiet_assets (1.0.3)
+      railties (>= 3.1, < 5.0)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -217,6 +236,12 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    representable (2.1.5)
+      multi_json
+      nokogiri
+      uber (~> 0.0.7)
+    rspec-collection_matchers (1.1.2)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -270,6 +295,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uber (0.0.13)
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -291,6 +317,8 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.3)
   capybara (~> 2.4.4)
   carrierwave
+  cells (~> 4.0.0.beta2)
+  cells-slim!
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
   dotenv-rails
@@ -302,7 +330,9 @@ DEPENDENCIES
   omniauth-github (~> 1.1.2)
   pg
   pry-byebug
+  quiet_assets
   rails (= 4.2.0)
+  rspec-collection_matchers (~> 1.1.2)
   rspec-rails (~> 3.1.0)
   sass-rails (~> 5.0)
   simple_form (~> 3.1.0)

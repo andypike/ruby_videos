@@ -45,7 +45,7 @@ $(document).ready(function(){
   });
 
   // MIXITUP
-  $('#Grid').mixitup();
+  $('#grid').mixitup();
 
   // NIVO-LIGHTBOX
   $('a.nivoz').nivoLightbox({
