@@ -3,6 +3,10 @@ module PageObjects
     def open
       visit context.root_path
     end
+
+    def presenters
+      all(".presenter")
+    end
   end
 
   def home_page

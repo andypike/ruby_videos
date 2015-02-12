@@ -37,7 +37,8 @@
             | PERFORMANCE
           li.filter.wow.fadeInRight data-filter="web-design"
             | SECURITY
-      #Grid.row
+
+      #grid.row
         .mix.testing.all.col-sm-4
           .img-wrapper
             = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
@@ -118,16 +119,8 @@
           h2.subtitle Including videos from these presenters
           hr
       .row.row-team
-        .col-team.col-sm-4.wow.pulse
-          .wrapper-team-pic
-            = image_tag "team/team-1.jpg", :class => "img-team"
-            .team-hover-bg
-            a href="#"
-              i.fa.fa-twitter.team-icon.team-t
-            a href="#"
-              i.fa.fa-github.team-icon.team-d
-          h2.team-title Andy Pike
-          h3.team-subtitle Technical Director
+        = cell("presenters/cells/presenter", :collection => @presenters, :method => :featured)
+
 #contact
   .bg-contact.grey
     .container-contact.container
@@ -139,7 +132,7 @@
       .row-contact.row
         .col-sm-12
           .row.wow.fadeInUp
-            form#ajax_form.form-contact action="email.php" method="POST" role="form"
+            form#ajax_form.form-contact action="#" method="POST" role="form"
               .col-sm-12
                 .form-group
                   input#name.form-control.form-flat name="name" placeholder="Name" type="text"
