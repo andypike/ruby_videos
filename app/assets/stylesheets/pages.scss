@@ -1,3 +1,16 @@
 .page {
   padding: 120px 0;
+
+  h1 {
+    font-size: 46px;
+  }
+
+  .list-header {
+    text-align: center;
+
+    a {
+      padding: 10px 25px;
+      margin-top: 10px;
+    }
+  }
 }

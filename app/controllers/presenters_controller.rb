@@ -1,5 +1,5 @@
 class PresentersController < ApplicationController
-  before_action :ensure_admin
+  before_action :ensure_admin, :except => :index
 
   def index
     @presenters = Presenter.ordered
@@ -10,7 +10,7 @@ class PresentersController < ApplicationController
   end
 
   def create
-    @form = build_form
+    @form = Presenters::Form.build_from(:presenter, params)
 
     run :operation => Presenters::Create,
         :ok_notice => t(:created_presenter),
@@ -18,14 +18,14 @@ class PresentersController < ApplicationController
   end
 
   def edit
-    @form = build_form
+    @form     = Presenters::Form.build_from(:presenter, params)
     presenter = Presenter.find(@form.id)
 
     AutoMapper.new(presenter).map_to(@form)
   end
 
   def update
-    @form = build_form
+    @form = Presenters::Form.build_from(:presenter, params)
 
     run :operation => Presenters::Update,
         :ok_notice => t(:updated_presenter),
@@ -33,10 +33,6 @@ class PresentersController < ApplicationController
   end
 
   private
-
-  def build_form
-    Presenters::Form.build_from(:presenter, params)
-  end
 
   def run(operation:, ok_notice:, fail_view:)
     operation.new(@form)

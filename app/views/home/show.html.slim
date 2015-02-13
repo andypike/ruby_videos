@@ -118,6 +118,9 @@
           h1.header-title FEATURING
           h2.subtitle Including videos from these presenters
           hr
+      .row.team-nav
+        .btn-delay.animated.fadeInUp
+          = link_to "See all presenters", presenters_path, :class => "btn btn-white"
       .row.row-team
         = cell("presenters/cells/presenter", :collection => @presenters, :method => :featured)
 
