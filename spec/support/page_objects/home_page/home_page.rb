@@ -12,8 +12,8 @@ module PageObjects
       find_link("See all presenters")
     end
   end
+end
 
-  def home_page
-    HomePage.new(self)
-  end
+module PageObjectHelpers
+  let(:home_page) { PageObjects::HomePage.new(self) }
 end

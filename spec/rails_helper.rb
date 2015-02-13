@@ -6,8 +6,9 @@ require "rspec/rails"
 require "capybara/rails"
 require "capybara/rspec"
 
-require "support/page_object"
-require "support/page_object_with_form"
+require "support/page_objects/page_object"
+require "support/page_objects/page_object_with_form"
+require "support/page_objects/page_object_helpers"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
@@ -25,5 +26,6 @@ RSpec.configure do |config|
   config.backtrace_exclusion_patterns << /gems/
   config.order = "random"
   config.include FactoryGirl::Syntax::Methods
-  config.include PageObjects
+  config.include PageObjects, :type => :feature
+  config.include PageObjectHelpers, :type => :feature
 end

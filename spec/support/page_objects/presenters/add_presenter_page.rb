@@ -8,8 +8,8 @@ module PageObjects
       visit new_presenter_path
     end
   end
+end
 
-  def add_presenter_page
-    AddPresenterPage.new(self)
-  end
+module PageObjectHelpers
+  let(:add_presenter_page) { PageObjects::AddPresenterPage.new(self) }
 end

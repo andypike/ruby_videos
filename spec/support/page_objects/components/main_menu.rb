@@ -13,8 +13,8 @@ module PageObjects
       find_link("Logout")
     end
   end
+end
 
-  def main_menu
-    MainMenu.new(self)
-  end
+module PageObjectHelpers
+  let(:main_menu) { PageObjects::MainMenu.new(self) }
 end

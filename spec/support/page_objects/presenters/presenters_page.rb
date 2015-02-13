@@ -12,8 +12,8 @@ module PageObjects
       find_link("Edit")
     end
   end
+end
 
-  def presenters_page
-    PresentersPage.new(self)
-  end
+module PageObjectHelpers
+  let(:presenters_page) { PageObjects::PresentersPage.new(self) }
 end

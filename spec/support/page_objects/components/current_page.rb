@@ -4,8 +4,8 @@ module PageObjects
       find("div", :text => /not authorised/i)
     end
   end
+end
 
-  def current_page
-    CurrentPage.new(self)
-  end
+module PageObjectHelpers
+  let(:current_page) { PageObjects::CurrentPage.new(self) }
 end
