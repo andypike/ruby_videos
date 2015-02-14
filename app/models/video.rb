@@ -3,9 +3,11 @@ class Video < ActiveRecord::Base
 
   belongs_to :presenter
 
+  enum :status => %i(draft published)
+
   scope :ordered, -> { order(:created_at => :desc) }
 
   def self.latest(max)
-    ordered.limit(max)
+    ordered.published.limit(max)
   end
 end

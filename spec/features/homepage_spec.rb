@@ -15,8 +15,8 @@ RSpec.describe "Homepage" do
     expect(home_page.presenters.size).to eq(3)
   end
 
-  it "shows the latest 9 videos" do
-    create_list(:video, 10)
+  it "shows the latest 9 published videos" do
+    create_list(:published_video, 10)
 
     home_page.open
 
