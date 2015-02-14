@@ -32,6 +32,7 @@ group :development, :test do
     :github => "nixme/jazz_hands",
     :branch => "bring-your-own-debugger"
   gem "pry-byebug"
+  gem "faker"
 end
 
 group :development do

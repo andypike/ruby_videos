@@ -1,6 +1,8 @@
 module Presenters
   module Cells
     class PresenterCell < Cell::ViewModel
+      delegate :current_user, :to => :controller
+
       def featured
         render
       end
@@ -11,21 +13,10 @@ module Presenters
 
       private
 
-      def name
-        model.name
-      end
-
-      def bio
-        model.bio
-      end
-
-      def title
-        model.title
-      end
-
-      def photo_url
-        model.photo_url
-      end
+      property :name
+      property :bio
+      property :title
+      property :photo_url
 
       def twitter_url
         "http://twitter.com/#{model.twitter}"
@@ -41,10 +32,6 @@ module Presenters
 
       def videos
         "99 Videos"
-      end
-
-      def current_user
-        parent_controller.current_user
       end
     end
   end

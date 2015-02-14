@@ -29,7 +29,7 @@
           hr.hr-portfolio
       .row.see-all-nav
         .btn-delay.animated.fadeInUp
-          = link_to "See all videos", "#", :class => "btn btn-red"
+          = link_to "See all videos", videos_path, :class => "btn btn-red"
 
       #grid.row
         = cell("videos/cells/video", :collection => @videos, :method => :latest)
