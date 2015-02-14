@@ -119,13 +119,43 @@ a.btn-white {
 a.btn-white:hover {
     background-color: #FFF;
     border-color: #f7f7f7;
-    color: #6C6B53;
+    color: #D82828;
 }
 
 a.btn-white:active,
 a.btn-white:focus {
     background-color: #f7f7f7;
     color: #6C6B53;
+}
+
+/* BTN-WHITE
+   ================================================== */
+
+a.btn-red {
+    display: inline-block;
+    padding: 20px 30px;
+    text-transform: uppercase;
+    color: #D82828;
+    border: solid #D82828 2px;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: transparent;
+    -webkit-transition: all ease-in .15s;
+    -moz-transition: all ease-in .15s;
+    -o-transition: all ease-in .15s;
+    transition: all ease-in .15s;
+}
+
+a.btn-red:hover {
+    background-color: #D82828;
+    border-color: #bc1919;
+    color: #FFF;
+}
+
+a.btn-red:active,
+a.btn-red:focus {
+    background-color: #bc1919;
+    color: #FFF;
 }
 
 /* SLIDER
@@ -443,7 +473,7 @@ a.btn-white:focus {
 
 .subtitle {
     font-weight: 300;
-    color: #34495E;
+    color: #000;
     font-size: 22px;
     text-align: center;
 }
@@ -833,8 +863,9 @@ a.btn-white:focus {
     margin-bottom: 60px;
 }
 
-.team-nav {
+.see-all-nav {
   margin-bottom: 60px;
+  text-align: center;
 }
 
 .row-team {

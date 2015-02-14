@@ -27,81 +27,19 @@
           h1.header-title LATEST VIDEOS
           h2.subtitle Check out the latest videos added to the collection
           hr.hr-portfolio
-      .row
-        ul.ul-portfolio
-          li.filter.wow.fadeInLeft data-filter="all"
-            | ALL
-          li.filter.wow.fadeInUp data-filter="testing" data-wow-delay="0.2s"
-            | TESTING
-          li.filter.wow.fadeInDown data-filter="perf" data-wow-delay="0.3s"
-            | PERFORMANCE
-          li.filter.wow.fadeInRight data-filter="web-design"
-            | SECURITY
+      .row.see-all-nav
+        .btn-delay.animated.fadeInUp
+          = link_to "See all videos", "#", :class => "btn btn-red"
 
       #grid.row
-        .mix.testing.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.nivoz data-lightbox-gallery="testing" href="images/portfolio/1280x800.gif" title="This is an image title"
-                span.glyphicon.glyphicon-play
-        .mix.web-design.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.nivoz data-lightbox-gallery="design" href="images/portfolio/1280x800.gif" title="This is an image title"
-                span.glyphicon.glyphicon-play
-        .mix.perf.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.perf href="images/portfolio/1280x800.gif" title="This is a video title"
-                span.glyphicon.glyphicon-play
-        .mix.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.nivoz href="images/portfolio/1280x800.gif" title="This is an image title"
-                span.glyphicon.glyphicon-play
-        .mix.web-design.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.nivoz data-lightbox-gallery="design" href="images/portfolio/1280x800.gif" title="This is an image title"
-                span.glyphicon.glyphicon-play
-        .mix.web-design.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.nivoz data-lightbox-gallery="gallery-1" href="images/portfolio/1280x800.gif" title="This is an image title"
-                span.glyphicon.glyphicon-play
-        .mix.testing.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.nivoz data-lightbox-gallery="testing" href="images/portfolio/1280x800.gif" title="This is an image title"
-                span.glyphicon.glyphicon-play
-        .mix.testing.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.nivoz data-lightbox-gallery="testing" href="images/portfolio/1280x800.gif" title="This is an image title"
-                span.glyphicon.glyphicon-play
-        .mix.web-design.all.col-sm-4
-          .img-wrapper
-            = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-            .bg-img-portfolio
-            .lightbox-wrapper
-              a.nivoz data-lightbox-gallery="design" href="images/portfolio/1280x800.gif" title="This is an image title"
-                span.glyphicon.glyphicon-play
+        - 9.times do |n|
+          .mix.all.col-sm-4
+            .img-wrapper
+              = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
+              .bg-img-portfolio
+              .lightbox-wrapper
+                a href="/videos/1" title="This is an image title"
+                  span.glyphicon.glyphicon-play
 .bg-quote
   .container
     .row-quote.row
@@ -118,7 +56,7 @@
           h1.header-title FEATURING
           h2.subtitle Including videos from these presenters
           hr
-      .row.team-nav
+      .row.see-all-nav
         .btn-delay.animated.fadeInUp
           = link_to "See all presenters", presenters_path, :class => "btn btn-white"
       .row.row-team
