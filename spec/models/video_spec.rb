@@ -52,4 +52,35 @@ RSpec.describe Video do
       end
     end
   end
+
+  describe "#list_for" do
+    let!(:published) { create(:published_video) }
+    let!(:draft)     { create(:draft_video) }
+
+    subject { described_class.list_for(user) }
+
+    context "an admin" do
+      let(:user) { build(:admin) }
+
+      it "returns all videos" do
+        expect(subject).to have(2).items
+      end
+    end
+
+    context "a viewer" do
+      let(:user) { build(:viewer) }
+
+      it "returns published videos" do
+        expect(subject).to eq([published])
+      end
+    end
+
+    context "a guest" do
+      let(:user) { GuestUser.new }
+
+      it "returns published videos" do
+        expect(subject).to eq([published])
+      end
+    end
+  end
 end

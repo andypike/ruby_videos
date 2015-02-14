@@ -1,22 +1,34 @@
 module Videos
   module Cells
     class VideoCell < Cell::ViewModel
+      delegate :current_user, :to => :controller
+
       def latest
+        render
+      end
+
+      def list
         render
       end
 
       private
 
-      def title
-        model.title
-      end
+      property :title
+      property :description
+      property :cover_url
 
-      def cover_url
-        model.cover_url
+      def subtitle
+        date = model.created_at.strftime("%d %B %Y")
+
+        "By #{model.presenter.name} on #{date}"
       end
 
       def show_path
         video_path(model)
+      end
+
+      def edit_path
+        edit_video_path(model)
       end
     end
   end

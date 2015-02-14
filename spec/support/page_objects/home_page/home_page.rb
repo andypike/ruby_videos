@@ -15,6 +15,10 @@ module PageObjects
     def videos
       all(".video")
     end
+
+    def videos_link
+      find_link("See all videos")
+    end
   end
 end
 
