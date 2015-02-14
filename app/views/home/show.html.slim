@@ -32,14 +32,8 @@
           = link_to "See all videos", "#", :class => "btn btn-red"
 
       #grid.row
-        - 9.times do |n|
-          .mix.all.col-sm-4
-            .img-wrapper
-              = image_tag "portfolio/400x300.gif", :class => "img-portfolio"
-              .bg-img-portfolio
-              .lightbox-wrapper
-                a href="/videos/1" title="This is an image title"
-                  span.glyphicon.glyphicon-play
+        = cell("videos/cells/video", :collection => @videos, :method => :latest)
+
 .bg-quote
   .container
     .row-quote.row
