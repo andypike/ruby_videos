@@ -11,6 +11,10 @@ module PageObjects
     def presenters_link
       find_link("See all presenters")
     end
+
+    def videos
+      all(".video")
+    end
   end
 end
 

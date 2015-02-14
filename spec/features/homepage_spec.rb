@@ -14,4 +14,12 @@ RSpec.describe "Homepage" do
 
     expect(home_page.presenters.size).to eq(3)
   end
+
+  it "shows the latest 9 videos" do
+    create_list(:video, 10)
+
+    home_page.open
+
+    expect(home_page.videos.size).to eq(9)
+  end
 end
