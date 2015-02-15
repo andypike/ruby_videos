@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Presenters::Form do
   subject { described_class.build_from(:presenter, params) }
+
   let(:params) do
     {
       :id => 1,

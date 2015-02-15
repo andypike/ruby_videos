@@ -39,7 +39,7 @@ RSpec.describe "Adding a presenter" do
         expect(presenter).to have_attributes(
           add_presenter_page.defaults.except(:photo)
         )
-        expect(presenter.photo.url).to include("photo.jpg")
+        expect(presenter.photo.url).to include("image.jpg")
       end
     end
 
@@ -57,6 +57,23 @@ RSpec.describe "Adding a presenter" do
 
         expect(add_presenter_page.field(:name)).to eq("x" * 256)
       end
+    end
+  end
+
+  context "as an visitor" do
+    it "hides the add button" do
+      main_menu.login_as(:visitor)
+      home_page.presenters_link.click
+
+      expect(presenters_page.add_link).not_to be_present
+    end
+  end
+
+  context "as an guest" do
+    it "hides the add button" do
+      home_page.presenters_link.click
+
+      expect(presenters_page.add_link).not_to be_present
     end
   end
 

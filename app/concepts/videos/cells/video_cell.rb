@@ -16,6 +16,7 @@ module Videos
       property :title
       property :description
       property :cover_url
+      property :status
 
       def subtitle
         date = model.created_at.strftime("%d %B %Y")

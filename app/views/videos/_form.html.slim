@@ -1,0 +1,10 @@
+= simple_form_for @form do |f|
+  = f.input :title
+  = f.input :description
+  = f.input :presenter_id, :collection => Presenter.ordered
+  = f.input :url
+  = f.input :embed_code
+  = f.input :status, :collection => enum_options(Video, :status)
+  = f.input :cover
+
+  = f.submit "Save"

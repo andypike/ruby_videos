@@ -1,9 +1,10 @@
 .row.wrapper-blog
   .col-sm-10.col-sm-offset-1
     .row.row-post
-      .col-sm-2.hidden-xs
-        = image_tag cover_url, :class => "author"
-      .col-sm-9
+      .col-sm-4.hidden-xs
+        = image_tag cover_url
+        p= status
+      .col-sm-8
         .wrapper-post
           h2.title
             = link_to title, "#"

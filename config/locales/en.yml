@@ -5,3 +5,5 @@ en:
   not_authorised: "You are not authorised to view this page"
   created_presenter: "Successfully added presenter"
   updated_presenter: "Successfully edited presenter"
+  created_video: "Successfully added video"
+  not_found: "cannot be found"
