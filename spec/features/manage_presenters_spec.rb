@@ -39,7 +39,7 @@ RSpec.describe "Adding a presenter" do
         expect(presenter).to have_attributes(
           add_presenter_page.defaults.except(:photo)
         )
-        expect(presenter.photo.url).to include("photo.jpg")
+        expect(presenter.photo.url).to include("image.jpg")
       end
     end
 

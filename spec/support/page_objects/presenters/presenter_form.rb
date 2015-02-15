@@ -12,7 +12,7 @@ module PageObjects
         :website => "www.sandimetz.com",
         :title   => "Author of POODR",
         :bio     => "Cyclist, Rubyist, reluctant author (poodr.com).",
-        :photo   => File.expand_path("spec/support/files/photo.jpg")
+        :photo   => File.expand_path("spec/support/files/image.jpg")
       }
     end
   end

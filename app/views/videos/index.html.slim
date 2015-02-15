@@ -1,3 +1,12 @@
-h1 Videos
+.page#list-videos
+  .container.container-intro
+    .row
+      .col-md-12.list-header
+        h1 Videos
 
-= cell("videos/cells/video", :collection => @videos, :method => :list)
+        - if current_user.admin?
+          = link_to "Add", new_video_path, :class => "btn btn-flat"
+
+    = cell("videos/cells/video",
+      :collection => @videos,
+      :method => :list)

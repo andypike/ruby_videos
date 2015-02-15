@@ -24,6 +24,8 @@ module PageObjects
         case control_type_for(id)
         when :file
           attach_file id, value
+        when :select
+          find_by_id(id).find("option[value='#{value}']").select_option
         else
           fill_in id, :with => value
         end

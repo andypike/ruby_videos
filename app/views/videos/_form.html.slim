@@ -1,0 +1,10 @@
+= simple_form_for @form do |f|
+  = f.input :title
+  = f.input :description
+  = f.input :presenter_id, :collection => Presenter.all
+  = f.input :url
+  = f.input :embed_code
+  = f.input :status, :collection => Video.statuses.keys.map { |k| [k.titleize, k] }
+  = f.input :cover
+
+  = f.submit "Save"
