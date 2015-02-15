@@ -6,3 +6,4 @@ en:
   created_presenter: "Successfully added presenter"
   updated_presenter: "Successfully edited presenter"
   created_video: "Successfully added video"
+  not_found: "cannot be found"

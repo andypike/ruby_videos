@@ -18,6 +18,7 @@ gem "carrierwave"
 gem "mini_magick"
 gem "cells", "~> 4.0.0.beta2"
 gem "cells-slim", :github => "trailblazer/cells-slim"
+gem "validate_url"
 
 group :development, :test do
   gem "web-console", "~> 2.0"

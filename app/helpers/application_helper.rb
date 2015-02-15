@@ -5,4 +5,11 @@ module ApplicationHelper
 
     link_to text, href, :class => "scroll-smooth"
   end
+
+  def enum_options(klass, attribute)
+    klass
+      .public_send(attribute.to_s.pluralize)
+      .keys
+      .map { |k| [k.titleize, k] }
+  end
 end
