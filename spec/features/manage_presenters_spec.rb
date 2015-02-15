@@ -60,6 +60,23 @@ RSpec.describe "Adding a presenter" do
     end
   end
 
+  context "as an visitor" do
+    it "hides the add button" do
+      main_menu.login_as(:visitor)
+      home_page.presenters_link.click
+
+      expect(presenters_page.add_link).not_to be_present
+    end
+  end
+
+  context "as an guest" do
+    it "hides the add button" do
+      home_page.presenters_link.click
+
+      expect(presenters_page.add_link).not_to be_present
+    end
+  end
+
   it_should_behave_like "an admin only page" do
     let(:open) { add_presenter_page.open }
   end
