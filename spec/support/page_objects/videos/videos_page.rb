@@ -7,6 +7,10 @@ module PageObjects
     def add_link
       find_link("Add")
     end
+
+    def edit_link
+      find_link("Edit")
+    end
   end
 end
 

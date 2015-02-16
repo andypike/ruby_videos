@@ -17,4 +17,20 @@ class VideosController < ApplicationController
       .on(:fail) { render :new }
       .call
   end
+
+  def edit
+    @form = Videos::Form.build_from(:video, params)
+    video = Video.find(@form.id)
+
+    AutoMapper.new(video).map_to(@form)
+  end
+
+  def update
+    @form = Videos::Form.build_from(:video, params)
+
+    Videos::Update.new(@form)
+      .on(:ok) { redirect_to videos_path, :notice => t(:updated_video) }
+      .on(:fail) { render :edit }
+      .call
+  end
 end

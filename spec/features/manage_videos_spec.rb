@@ -105,3 +105,73 @@ RSpec.describe "Adding a video" do
     let(:open) { add_video_page.open }
   end
 end
+
+RSpec.describe "Edit a video" do
+  let!(:video) { create(:video) }
+
+  before { home_page.open }
+
+  context "as an admin" do
+    before do
+      main_menu.login_as(:admin)
+      home_page.videos_link.click
+      videos_page.edit_link.click
+    end
+
+    context "with valid data" do
+      it "populates the form" do
+        expect(edit_video_page.field(:title)).to eq("All the little things")
+        expect(edit_video_page.field(:status)).to eq("draft")
+      end
+
+      it "allows the video to be updated" do
+        edit_video_page.fill_in_form(:title => "Edited Title")
+
+        expect do
+          edit_video_page.submit_form
+        end.not_to change(Video, :count)
+
+        expect(page).to have_content(/successfully edited video/i)
+        expect(page).to have_content("Edited Title")
+        expect(video.reload.title).to eq("Edited Title")
+      end
+    end
+
+    context "with invalid data" do
+      it "shows error messages" do
+        edit_video_page.fill_in_form(:title => "")
+        edit_video_page.submit_form
+
+        expect(page).to have_content(/can't be blank/i)
+      end
+
+      it "populates the form with submitted values" do
+        edit_video_page.fill_in_form(:title => "x" * 256)
+        edit_video_page.submit_form
+
+        expect(edit_video_page.field(:title)).to eq("x" * 256)
+      end
+    end
+  end
+
+  context "as an visitor" do
+    it "hides the edit button" do
+      main_menu.login_as(:visitor)
+      home_page.videos_link.click
+
+      expect(videos_page.edit_link).not_to be_present
+    end
+  end
+
+  context "as an guest" do
+    it "hides the edit button" do
+      home_page.videos_link.click
+
+      expect(videos_page.edit_link).not_to be_present
+    end
+  end
+
+  it_should_behave_like "an admin only page" do
+    let(:open) { edit_video_page.open(video) }
+  end
+end

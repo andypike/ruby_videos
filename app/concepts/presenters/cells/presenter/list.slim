@@ -10,5 +10,4 @@
             br
             small.meta= videos
           p= bio
-          - if current_user.admin?
-            = link_to "Edit", edit_path, :class => "btn btn-flat"
+          = edit_link

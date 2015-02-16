@@ -16,7 +16,6 @@ module Videos
       property :title
       property :description
       property :cover_url
-      property :status
 
       def subtitle
         date = model.created_at.strftime("%d %B %Y")
@@ -28,8 +27,16 @@ module Videos
         video_path(model)
       end
 
-      def edit_path
-        edit_video_path(model)
+      def edit_link
+        return unless current_user.admin?
+
+        link_to("Edit", edit_video_path(model), :class => "btn btn-flat")
+      end
+
+      def status
+        return unless current_user.admin?
+
+        content_tag(:div, model.status.titleize, :class => "label label-info")
       end
     end
   end

@@ -14,7 +14,7 @@ module Videos
       :length   => { :maximum => 255 },
       :presence => true
 
-    validates :description, :embed_code, :cover,
+    validates :description, :embed_code,
       :presence => true
 
     validates :status,
