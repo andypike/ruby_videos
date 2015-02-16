@@ -69,14 +69,6 @@ RSpec.describe Videos::Form do
       end
     end
 
-    describe "#cover" do
-      it "cannot be blank" do
-        subject.cover = ""
-
-        expect(subject).not_to be_valid
-      end
-    end
-
     describe "#url" do
       it "cannot be blank" do
         subject.url = ""
