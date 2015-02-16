@@ -7,8 +7,11 @@ class AutoMapper
 
   def map_to(destination)
     destination.tap do |d|
-      source.attributes.each do |attribute, value|
-        d.public_send("#{attribute}=", value) if d.respond_to?(attribute)
+      source.attributes.each do |attribute, _|
+        if d.respond_to?(attribute)
+          value = source.public_send(attribute)
+          d.public_send("#{attribute}=", value)
+        end
       end
     end
   end
