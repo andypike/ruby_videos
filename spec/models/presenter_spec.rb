@@ -41,9 +41,12 @@ RSpec.describe Presenter do
     subject { described_class.published_videos }
 
     it "returns only published videos by the presenter" do
-      draft     = create(:draft_video)
-      published = create(:published_video)
+      draft           = build(:draft_video)
+      published       = build(:published_video)
+      other_published = build(:published_video)
+
       presenter = create(:presenter, :videos => [draft, published])
+      other     = create(:presenter, :videos => [other_published])
 
       expect(presenter.published_videos).to eq([published])
     end
