@@ -26,12 +26,14 @@ module Presenters
         "http://github.com/#{model.github}"
       end
 
-      def edit_path
-        edit_presenter_path(model)
+      def edit_link
+        return unless current_user.admin?
+
+        link_to("Edit", edit_presenter_path(model), :class => "btn btn-flat")
       end
 
       def videos
-        "99 Videos"
+        pluralize(model.published_videos.size, "Video")
       end
     end
   end
