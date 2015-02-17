@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   before_action :ensure_admin, :except => :index
 
   def index
-    @videos = Video.list_for(current_user)
+    @videos = Video.list_for(current_user).page(params[:page])
   end
 
   def new
