@@ -2,7 +2,7 @@ class PresentersController < ApplicationController
   before_action :ensure_admin, :except => :index
 
   def index
-    @presenters = Presenter.ordered
+    @presenters = Presenter.ordered.page(params[:page])
   end
 
   def new

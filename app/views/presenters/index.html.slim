@@ -1,4 +1,4 @@
-.page#list-presenters
+.content-page#list-presenters
   .container.container-intro
     .row
       .col-md-12.list-header
@@ -10,3 +10,6 @@
     = cell("presenters/cells/presenter",
       :collection => @presenters,
       :method => :list)
+
+    .row.pagination-controls
+      = paginate @presenters

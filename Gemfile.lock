@@ -153,6 +153,12 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.2)
     jwt (1.2.1)
+    kaminari (0.16.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     launchy (2.4.3)
       addressable (~> 2.3)
     loofah (2.0.1)
@@ -334,6 +340,8 @@ DEPENDENCIES
   faker
   jazz_hands!
   jquery-rails
+  kaminari
+  kaminari-bootstrap (~> 3.0.1)
   launchy
   mini_magick
   omniauth-github (~> 1.1.2)

@@ -1,4 +1,4 @@
-.page#list-videos
+.content-page#list-videos
   .container.container-intro
     .row
       .col-md-12.list-header
@@ -10,3 +10,6 @@
     = cell("videos/cells/video",
       :collection => @videos,
       :method => :list)
+
+    .row.pagination-controls
+      = paginate @videos
