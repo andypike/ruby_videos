@@ -22,7 +22,8 @@ module Videos
       :presence => true
 
     validates :url,
-      :url => true
+      :url    => true,
+      :length => { :maximum => 255 }
 
     validates :presenter_id,
       :presence => true,

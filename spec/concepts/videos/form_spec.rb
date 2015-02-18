@@ -81,6 +81,12 @@ RSpec.describe Videos::Form do
 
         expect(subject).not_to be_valid
       end
+
+      it "cannot be over 255 charaters in length" do
+        subject.url = "http://#{'x' * 245}.com"
+
+        expect(subject).not_to be_valid
+      end
     end
 
     describe "#presenter_id" do
