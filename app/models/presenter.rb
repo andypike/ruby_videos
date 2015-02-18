@@ -5,8 +5,11 @@ class Presenter < ActiveRecord::Base
 
   scope :ordered, -> { order(:name => :asc) }
 
-  def self.random(max)
-    limit(max).order("RANDOM()")
+  def self.with_published_videos(max)
+    joins(:videos)
+      .where(:videos => { :status => Video.statuses[:published] })
+      .limit(max)
+      .order("RANDOM()")
   end
 
   def published_videos

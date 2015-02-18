@@ -8,6 +8,10 @@ module PageObjects
       all(".presenter")
     end
 
+    def presenter(name)
+      find(".presenter", :text => name)
+    end
+
     def presenters_link
       find_link("See all presenters")
     end

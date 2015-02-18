@@ -11,14 +11,19 @@ RSpec.describe Presenter do
     end
   end
 
-  describe ".random" do
-    subject { described_class.random(3) }
+  describe ".with_published_videos" do
+    subject { described_class.with_published_videos(3) }
 
-    context "more presenters exist than maximum specified" do
-      it "returns maximum number of presenters" do
-        create_list(:presenter, 5)
+    context "more presenters with published videos exist than max specified" do
+      it "returns any n presenters" do
+        with_published = create_list(:presenter_with_published_video, 5)
+        with_draft = create(:presenter_with_draft_video)
+        no_videos  = create(:presenter)
 
         expect(subject).to have(3).items
+        expect(subject - with_published).to be_empty
+        expect(subject).not_to include(with_draft)
+        expect(subject).not_to include(no_videos)
       end
     end
 
@@ -28,11 +33,16 @@ RSpec.describe Presenter do
       end
     end
 
-    context "less presenters exist than maximum specified" do
-      it "returns all presenters" do
-        create_list(:presenter, 2)
+    context "less presenters with published videos exist than max specified" do
+      it "returns all presenters with published videos" do
+        with_published = create_list(:presenter_with_published_video, 2)
+        with_draft = create(:presenter_with_draft_video)
+        no_videos  = create(:presenter)
 
         expect(subject).to have(2).items
+        expect(subject).to contain_exactly(*with_published)
+        expect(subject).not_to include(with_draft)
+        expect(subject).not_to include(no_videos)
       end
     end
   end
