@@ -1,15 +1,37 @@
 require "rails_helper"
 
 RSpec.describe "Listing presenters" do
+  let!(:published) { create(:presenter_with_published_video) }
+  let!(:draft)     { create(:presenter_with_draft_video) }
+
   before { home_page.open }
 
-  context "any user" do
-    it "displays presenters" do
-      presenter = create(:presenter)
-
+  context "guest user" do
+    it "displays presenters with published videos" do
       home_page.presenters_link.click
 
-      expect(page).to have_content(presenter.name)
+      expect(page).to have_content(published.name)
+      expect(page).not_to have_content(draft.name)
+    end
+  end
+
+  context "viewer user" do
+    it "displays presenters with published videos" do
+      main_menu.login_as(:viewer)
+      home_page.presenters_link.click
+
+      expect(page).to have_content(published.name)
+      expect(page).not_to have_content(draft.name)
+    end
+  end
+
+  context "admin user" do
+    it "displays all presenters" do
+      main_menu.login_as(:admin)
+      home_page.presenters_link.click
+
+      expect(page).to have_content(published.name)
+      expect(page).to have_content(draft.name)
     end
   end
 end
@@ -96,7 +118,7 @@ RSpec.describe "Edit a presenter" do
 
     context "with valid data" do
       it "populates the form" do
-        expect(edit_presenter_page.field(:name)).to eq("Bob Smith")
+        expect(edit_presenter_page.field(:name)).to eq(presenter.name)
       end
 
       it "allows the presenter to be updated" do

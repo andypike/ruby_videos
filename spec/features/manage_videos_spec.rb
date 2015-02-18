@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Listing videos" do
-  let!(:published) { create(:published_video, :title => Faker::Lorem.sentence) }
-  let!(:draft)     { create(:draft_video, :title => Faker::Lorem.sentence) }
+  let!(:published) { create(:published_video) }
+  let!(:draft)     { create(:draft_video) }
 
   before { home_page.open }
 
@@ -26,7 +26,7 @@ RSpec.describe "Listing videos" do
   end
 
   context "admin user" do
-    it "displays published videos" do
+    it "displays all videos" do
       main_menu.login_as(:admin)
       home_page.videos_link.click
 
@@ -120,7 +120,7 @@ RSpec.describe "Edit a video" do
 
     context "with valid data" do
       it "populates the form" do
-        expect(edit_video_page.field(:title)).to eq("All the little things")
+        expect(edit_video_page.field(:title)).to eq(video.title)
         expect(edit_video_page.field(:status)).to eq("draft")
       end
 

@@ -16,6 +16,12 @@ class Presenter < ActiveRecord::Base
       .where(:videos => { :status => Video.statuses[:published] })
   end
 
+  def self.list_for(user)
+    return ordered if user.admin?
+
+    ordered.with_published_videos
+  end
+
   def published_videos
     videos.published
   end
