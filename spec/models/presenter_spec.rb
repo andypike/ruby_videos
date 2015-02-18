@@ -11,8 +11,8 @@ RSpec.describe Presenter do
     end
   end
 
-  describe ".with_published_videos" do
-    subject { described_class.with_published_videos(3) }
+  describe ".random_published" do
+    subject { described_class.random_published(3) }
 
     context "more presenters with published videos exist than max specified" do
       it "returns any n presenters" do
@@ -59,6 +59,37 @@ RSpec.describe Presenter do
       other     = create(:presenter, :videos => [other_published])
 
       expect(presenter.published_videos).to eq([published])
+    end
+  end
+
+  describe "#list_for" do
+    let!(:published) { create(:presenter_with_published_video) }
+    let!(:draft)     { create(:presenter_with_draft_video) }
+
+    subject { described_class.list_for(user) }
+
+    context "an admin" do
+      let(:user) { build(:admin) }
+
+      it "returns all presenters" do
+        expect(subject).to have(2).items
+      end
+    end
+
+    context "a viewer" do
+      let(:user) { build(:viewer) }
+
+      it "returns presenters with published videos" do
+        expect(subject).to eq([published])
+      end
+    end
+
+    context "a guest" do
+      let(:user) { GuestUser.new }
+
+      it "returns presenters with published videos" do
+        expect(subject).to eq([published])
+      end
     end
   end
 end

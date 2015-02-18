@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :presenter do
-    name "Bob Smith"
+    name { Faker::Name.name }
 
     factory :presenter_with_published_video do
       after(:create) do |presenter, _|
