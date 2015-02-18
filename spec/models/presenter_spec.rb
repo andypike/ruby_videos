@@ -11,8 +11,8 @@ RSpec.describe Presenter do
     end
   end
 
-  describe ".with_published_videos" do
-    subject { described_class.with_published_videos(3) }
+  describe ".random_published" do
+    subject { described_class.random_published(3) }
 
     context "more presenters with published videos exist than max specified" do
       it "returns any n presenters" do
