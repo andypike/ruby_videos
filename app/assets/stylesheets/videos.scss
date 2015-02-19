@@ -1,0 +1,20 @@
+#show-videos {
+  .presenter {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .video {
+    margin: 20px 0;
+  }
+
+  .description {
+    font-size: 18px;
+  }
+
+  .original a {
+    @extend .btn;
+    @extend .btn-flat;
+    margin-top: 20px;
+  }
+}
