@@ -1,6 +1,8 @@
 module PageObjects
   class MainMenu < PageObject
     def login_as(role)
+      return if role == :guest
+
       create(:admin) if role == :admin
       login_link.click
     end

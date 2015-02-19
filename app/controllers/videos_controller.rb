@@ -7,6 +7,8 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.friendly.find(params[:id])
+
+    ensure_admin if @video.draft?
   end
 
   def new
