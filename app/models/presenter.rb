@@ -1,4 +1,7 @@
 class Presenter < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, :use => :slugged
+
   mount_uploader :photo, Presenters::PhotoUploader
 
   has_many :videos

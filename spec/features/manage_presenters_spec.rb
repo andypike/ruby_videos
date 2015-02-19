@@ -172,3 +172,36 @@ RSpec.describe "Edit a presenter" do
     let(:open) { edit_presenter_page.open(presenter) }
   end
 end
+
+RSpec.describe "View a presenter" do
+  def expect_page_to_be_seo_friendly
+    expect(current_path).not_to include(presenter.id.to_s)
+    expect(page).to have_title(/#{presenter.name}/i)
+  end
+
+  def expect_page_to_display_presenter
+    expect(page).to have_content(presenter.name)
+  end
+
+  def expect_page_to_display_presenter_published_videos
+    expect(page).to have_content(video.title)
+  end
+
+  context "that is published" do
+    let!(:presenter) { create(:presenter_with_published_video) }
+    let(:video) { presenter.videos.first }
+
+    context "as an admin" do
+      it "shows the presenters page" do
+        home_page.open
+        main_menu.login_as(:admin)
+        presenters_page.open
+        presenters_page.presenter_link(presenter).click
+
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_presenter
+        expect_page_to_display_presenter_published_videos
+      end
+    end
+  end
+end

@@ -1,0 +1,16 @@
+= content_for :title do
+  | Ruby Videos | #{@presenter.name}
+
+.content-page#show-presenters
+  .container.container-intro
+    .row
+      .col-md-12.list-header
+        h1= @presenter.name
+        p= @presenter.bio
+
+        / p= link_to "Twitter", twitter_url
+        / p= link_to "Github", github_url
+
+    = cell("videos/cells/video",
+      :collection => @presenter.videos,
+      :method => :list)

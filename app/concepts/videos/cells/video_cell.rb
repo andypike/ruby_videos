@@ -18,9 +18,11 @@ module Videos
       property :cover_url
 
       def subtitle
-        date = model.created_at.strftime("%d %B %Y")
+        link_to model.presenter.name, presenter_path(model.presenter)
+      end
 
-        "By #{model.presenter.name} on #{date}"
+      def show_link
+        link_to title, show_path
       end
 
       def show_path

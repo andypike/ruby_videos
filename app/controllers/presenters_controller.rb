@@ -5,6 +5,10 @@ class PresentersController < ApplicationController
     @presenters = Presenter.list_for(current_user).page(params[:page])
   end
 
+  def show
+    @presenter = Presenter.friendly.find(params[:id])
+  end
+
   def new
     @form = Presenters::Form.new
   end

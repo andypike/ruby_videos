@@ -1,8 +1,8 @@
 ul.nav.navbar-nav.navbar-right
-  li= smooth_link_to "Home", "home"
-  li= smooth_link_to "Latest", "latest"
-  li= smooth_link_to "Featuring", "featuring"
-  li= smooth_link_to "Contact", "contact"
+  li= link_to "Home", root_path
+  li= link_to "Videos", videos_path
+  li= link_to "Presenters", presenters_path
+
 
   - if current_user.authenticated?
     li= link_to "Logout", session_path, :method => :delete

@@ -32,6 +32,14 @@ module Presenters
         link_to("Edit", edit_presenter_path(model), :class => "btn btn-flat")
       end
 
+      def show_link
+        link_to name, show_path
+      end
+
+      def show_path
+        presenter_path(model)
+      end
+
       def videos
         pluralize(model.published_videos.size, "Video")
       end
