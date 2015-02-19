@@ -21,6 +21,7 @@ gem "cells-slim", :github => "trailblazer/cells-slim"
 gem "validate_url"
 gem "kaminari"
 gem "kaminari-bootstrap", "~> 3.0.1"
+gem "friendly_id",        "~> 5.1.0"
 
 group :development, :test do
   gem "web-console", "~> 2.0"

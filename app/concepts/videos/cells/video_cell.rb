@@ -24,7 +24,7 @@ module Videos
       end
 
       def show_path
-        video_path(model)
+        video_path(model.to_param)
       end
 
       def edit_link

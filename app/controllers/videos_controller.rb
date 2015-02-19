@@ -1,8 +1,12 @@
 class VideosController < ApplicationController
-  before_action :ensure_admin, :except => :index
+  before_action :ensure_admin, :except => [:index, :show]
 
   def index
     @videos = Video.list_for(current_user).page(params[:page])
+  end
+
+  def show
+    @video = Video.friendly.find(params[:id])
   end
 
   def new
@@ -20,7 +24,7 @@ class VideosController < ApplicationController
 
   def edit
     @form = Videos::Form.build_from(:video, params)
-    video = Video.find(@form.id)
+    video = Video.friendly.find(@form.id)
 
     AutoMapper.new(video).map_to(@form)
   end

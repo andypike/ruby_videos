@@ -1,4 +1,7 @@
 class Video < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, :use => :slugged
+
   mount_uploader :cover, Videos::CoverUploader
 
   belongs_to :presenter

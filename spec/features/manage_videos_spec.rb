@@ -175,3 +175,53 @@ RSpec.describe "Edit a video" do
     let(:open) { edit_video_page.open(video) }
   end
 end
+
+RSpec.describe "View a video" do
+  context "that is published" do
+    let!(:presenter) { create(:presenter_with_published_video) }
+    let(:video)      { presenter.videos.first }
+
+    def test_video_show_page
+      home_page.open
+      yield if block_given?
+      videos_page.open
+      videos_page.video_link(video).click
+
+      seo_path = "/videos/" + video.title.tr(" ", "-").downcase
+      expect(current_path).not_to eq(seo_path)
+      expect(page).to have_title(/#{video.title} By #{presenter.name}/i)
+    end
+
+    context "as an admin" do
+      it "shows the video on an seo friendly url" do
+        test_video_show_page { main_menu.login_as(:admin) }
+      end
+    end
+
+    context "as a viewer" do
+      it "shows the video on an seo friendly url" do
+        test_video_show_page { main_menu.login_as(:viewer) }
+      end
+    end
+
+    context "as a guest" do
+      it "shows the video on an seo friendly url" do
+        test_video_show_page
+      end
+    end
+  end
+
+  context "that is a draft" do
+    context "as an admin" do
+      it "is accessible"
+    end
+
+    context "as a viewer" do
+      it "is not accessible"
+    end
+
+    context "as a guest" do
+      it "is not accessible"
+    end
+  end
+end
