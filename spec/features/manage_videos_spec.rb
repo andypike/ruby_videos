@@ -175,3 +175,75 @@ RSpec.describe "Edit a video" do
     let(:open) { edit_video_page.open(video) }
   end
 end
+
+RSpec.describe "View a video" do
+  let(:video) { presenter.videos.first }
+
+  def expect_page_to_be_seo_friendly
+    expect(current_path).not_to include(video.id.to_s)
+    expect(page).to have_title(/#{video.title} By #{presenter.name}/i)
+  end
+
+  def expect_page_to_display_video
+    expect(page).to have_content(video.title)
+    expect(page.html).to include(video.embed_code)
+  end
+
+  context "that is published" do
+    let!(:presenter) { create(:presenter_with_published_video) }
+
+    before do
+      home_page.open
+      main_menu.login_as(user)
+      videos_page.open
+      videos_page.video_link(video).click
+    end
+
+    context "as an admin" do
+      let(:user) { :admin }
+
+      it "shows the video on an seo friendly url" do
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_video
+      end
+    end
+
+    context "as a viewer" do
+      let(:user) { :viewer }
+
+      it "shows the video on an seo friendly url" do
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_video
+      end
+    end
+
+    context "as a guest" do
+      let(:user) { :guest }
+
+      it "shows the video on an seo friendly url" do
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_video
+      end
+    end
+  end
+
+  context "that is a draft" do
+    let!(:presenter) { create(:presenter_with_draft_video) }
+
+    before { home_page.open }
+
+    context "as an admin" do
+      it "shows the video on an seo friendly url" do
+        main_menu.login_as(:admin)
+        show_video_page.open(video)
+
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_video
+      end
+    end
+
+    it_should_behave_like "an admin only page" do
+      let(:open) { show_video_page.open(video) }
+    end
+  end
+end

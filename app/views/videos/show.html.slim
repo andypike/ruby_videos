@@ -1,0 +1,18 @@
+= content_for :title do
+  | Ruby Videos | #{@video.title} By #{@video.presenter.name}
+
+.content-page#show-videos
+  .container.container-intro
+    .row
+      .col-md-12.list-header
+        h1= @video.title
+        h2 by #{@video.presenter.name}
+
+        .video
+          = @video.embed_code.html_safe
+
+    .row
+      .col-md-2
+      .col-md-8
+        p.description= @video.description
+        p.original= link_to "Original", @video.url

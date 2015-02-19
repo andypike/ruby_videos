@@ -11,6 +11,10 @@ module PageObjects
     def edit_link
       find_link("Edit")
     end
+
+    def video_link(video)
+      find_link(video.title)
+    end
   end
 end
 

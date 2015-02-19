@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214002816) do
+ActiveRecord::Schema.define(version: 20150218233425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "presenters", force: :cascade do |t|
     t.string   "name",       default: "", null: false
@@ -52,9 +53,11 @@ ActiveRecord::Schema.define(version: 20150214002816) do
     t.string   "cover",        default: "", null: false
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.string   "slug"
   end
 
   add_index "videos", ["presenter_id"], name: "index_videos_on_presenter_id", using: :btree
+  add_index "videos", ["slug"], name: "index_videos_on_slug", unique: true, using: :btree
 
   add_foreign_key "videos", "presenters"
 end
