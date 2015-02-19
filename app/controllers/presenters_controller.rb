@@ -24,7 +24,7 @@ class PresentersController < ApplicationController
 
   def edit
     @form     = Presenters::Form.build_from(:presenter, params)
-    presenter = Presenter.find(@form.id)
+    presenter = Presenter.friendly.find(@form.id)
 
     AutoMapper.new(presenter).map_to(@form)
   end

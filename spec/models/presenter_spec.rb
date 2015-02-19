@@ -45,6 +45,15 @@ RSpec.describe Presenter do
         expect(subject).not_to include(no_videos)
       end
     end
+
+    context "a presenter has multiple published videos" do
+      it "returns them only once" do
+        presenter = create(:presenter)
+        create_list(:published_video, 2, :presenter => presenter)
+
+        expect(subject).to have(1).items
+      end
+    end
   end
 
   describe "#published_videos" do
