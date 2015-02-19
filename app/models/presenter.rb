@@ -11,12 +11,10 @@ class Presenter < ActiveRecord::Base
   def self.random_published(max)
     with_published_videos
       .limit(max)
-      .order("random")
   end
 
   def self.with_published_videos
-    select("presenters.*, RANDOM() as random")
-      .joins(:videos)
+    joins(:videos)
       .where(:videos => { :status => Video.statuses[:published] })
       .distinct
   end
