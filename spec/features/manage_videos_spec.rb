@@ -187,8 +187,8 @@ RSpec.describe "View a video" do
       videos_page.open
       videos_page.video_link(video).click
 
-      seo_path = "/videos/" + video.title.tr(" ", "-").downcase
-      expect(current_path).not_to eq(seo_path)
+      seo_path = "/videos/" + video.title.delete(".").tr(" ", "-").downcase
+      expect(current_path).to eq(seo_path)
       expect(page).to have_title(/#{video.title} By #{presenter.name}/i)
     end
 
