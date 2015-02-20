@@ -9,8 +9,9 @@ class Presenter < ActiveRecord::Base
   scope :ordered, -> { order(:name => :asc) }
 
   def self.random_published(max)
-    with_published_videos
-      .limit(max)
+    where(
+      :id => select(:id).with_published_videos
+    ).limit(max).order("RANDOM()")
   end
 
   def self.with_published_videos
