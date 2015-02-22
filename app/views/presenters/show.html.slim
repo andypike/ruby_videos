@@ -1,0 +1,12 @@
+= content_for :title do
+  | Ruby Videos | #{@presenter.name}
+
+.content-page#show-presenters
+  .container.container-intro
+    .row
+      .col-md-12.list-header
+        = cell("presenters/cells/presenter", @presenter).call
+
+    = cell("videos/cells/video",
+      :collection => @videos,
+      :method => :list)

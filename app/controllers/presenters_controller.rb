@@ -1,8 +1,15 @@
 class PresentersController < ApplicationController
-  before_action :ensure_admin, :except => :index
+  before_action :ensure_admin, :except => [:index, :show]
 
   def index
     @presenters = Presenter.list_for(current_user).page(params[:page])
+  end
+
+  def show
+    @presenter = Presenter.friendly.find(params[:id])
+    @videos = @presenter.videos_for(current_user)
+
+    ensure_admin unless @presenter.published?
   end
 
   def new
@@ -20,7 +27,7 @@ class PresentersController < ApplicationController
 
   def edit
     @form     = Presenters::Form.build_from(:presenter, params)
-    presenter = Presenter.find(@form.id)
+    presenter = Presenter.friendly.find(@form.id)
 
     AutoMapper.new(presenter).map_to(@form)
   end

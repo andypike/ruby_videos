@@ -172,3 +172,97 @@ RSpec.describe "Edit a presenter" do
     let(:open) { edit_presenter_page.open(presenter) }
   end
 end
+
+RSpec.describe "View a presenter" do
+  let(:published) { create(:published_video) }
+  let(:draft)     { create(:draft_video) }
+
+  def expect_page_to_be_seo_friendly
+    expect(current_path).not_to include(presenter.id.to_s)
+    expect(page).to have_title(/#{presenter.name}/i)
+  end
+
+  def expect_page_to_display_presenter
+    expect(page).to have_content(presenter.name)
+  end
+
+  context "that is published" do
+    let!(:presenter) { create(:presenter, :videos => [published, draft]) }
+
+    before do
+      home_page.open
+      main_menu.login_as(user)
+      presenters_page.open
+      presenters_page.presenter_link(presenter).click
+    end
+
+    context "as an admin" do
+      let(:user) { :admin }
+
+      it "shows the presenters page" do
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_presenter
+      end
+
+      it "shows published and draft videos" do
+        expect(show_presenter_page.video_link(published)).to be_present
+        expect(show_presenter_page.video_link(draft)).to be_present
+      end
+    end
+
+    context "as a visitor" do
+      let(:user) { :visitor }
+
+      it "shows the presenters page" do
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_presenter
+      end
+
+      it "shows published videos" do
+        expect(show_presenter_page.video_link(published)).to be_present
+      end
+
+      it "does not show draft videos" do
+        expect(show_presenter_page.video_link(draft)).not_to be_present
+      end
+    end
+
+    context "as a guest" do
+      let(:user) { :guest }
+
+      it "shows the presenters page" do
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_presenter
+      end
+
+      it "shows published videos" do
+        expect(show_presenter_page.video_link(published)).to be_present
+      end
+
+      it "does not show draft videos" do
+        expect(show_presenter_page.video_link(draft)).not_to be_present
+      end
+    end
+  end
+
+  context "that isn't published" do
+    let!(:presenter) { create(:presenter, :videos => [draft]) }
+
+    before { home_page.open }
+
+    context "as an admin" do
+      it "shows the presenters page" do
+        main_menu.login_as(:admin)
+        show_presenter_page.open(presenter)
+
+        expect_page_to_be_seo_friendly
+        expect_page_to_display_presenter
+        expect(show_presenter_page.video_link(draft)).to be_present
+      end
+    end
+
+    it_should_behave_like "an admin only page" do
+      let(:open) { show_presenter_page.open(presenter) }
+    end
+  end
+end

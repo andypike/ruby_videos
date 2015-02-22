@@ -11,6 +11,10 @@ module PageObjects
     def edit_link
       find_link("Edit")
     end
+
+    def presenter_link(presenter)
+      find_link(presenter.name)
+    end
   end
 end
 

@@ -1,13 +1,13 @@
 .row.wrapper-blog
   .col-sm-10.col-sm-offset-1
-    .row.row-post
+    .row.row-post.video
       .col-sm-4.hidden-xs
-        = image_tag cover_url, :class => "cover"
+        = link_to image_tag(cover_url, :class => "cover"), show_path
         .status= status
       .col-sm-8
         .wrapper-post
           h2.title
-            = link_to title, show_path
+            = show_link
             br
             small.meta= subtitle
           p= description

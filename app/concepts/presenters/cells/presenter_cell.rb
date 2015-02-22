@@ -11,6 +11,10 @@ module Presenters
         render
       end
 
+      def show
+        render
+      end
+
       private
 
       property :name
@@ -26,10 +30,30 @@ module Presenters
         "http://github.com/#{model.github}"
       end
 
+      def twitter_link
+        return if model.twitter.blank?
+
+        link_to("Twitter", twitter_url, :class => "btn btn-flat")
+      end
+
+      def github_link
+        return if model.github.blank?
+
+        link_to("GitHub", github_url, :class => "btn btn-flat")
+      end
+
       def edit_link
         return unless current_user.admin?
 
         link_to("Edit", edit_presenter_path(model), :class => "btn btn-flat")
+      end
+
+      def show_link
+        link_to(name, show_path)
+      end
+
+      def show_path
+        presenter_path(model)
       end
 
       def videos
