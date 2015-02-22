@@ -1,10 +1,11 @@
 class Presenter < ActiveRecord::Base
   extend FriendlyId
+
   friendly_id :name, :use => :slugged
 
   mount_uploader :photo, Presenters::PhotoUploader
 
-  has_many :videos
+  has_many :videos, -> { order(:created_at => :desc) }
 
   scope :ordered, -> { order(:name => :asc) }
 
@@ -28,5 +29,15 @@ class Presenter < ActiveRecord::Base
 
   def published_videos
     videos.published
+  end
+
+  def published?
+    published_videos.present?
+  end
+
+  def videos_for(user)
+    return videos if user.admin?
+
+    published_videos
   end
 end

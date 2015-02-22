@@ -56,22 +56,7 @@ RSpec.describe Presenter do
     end
   end
 
-  describe "#published_videos" do
-    subject { described_class.published_videos }
-
-    it "returns only published videos by the presenter" do
-      draft           = build(:draft_video)
-      published       = build(:published_video)
-      other_published = build(:published_video)
-
-      presenter = create(:presenter, :videos => [draft, published])
-      other     = create(:presenter, :videos => [other_published])
-
-      expect(presenter.published_videos).to eq([published])
-    end
-  end
-
-  describe "#list_for" do
+  describe ".list_for" do
     let!(:published) { create(:presenter_with_published_video) }
     let!(:draft)     { create(:presenter_with_draft_video) }
 
@@ -98,6 +83,56 @@ RSpec.describe Presenter do
 
       it "returns presenters with published videos" do
         expect(subject).to eq([published])
+      end
+    end
+  end
+
+  describe "#published_videos" do
+    it "returns only published videos by the presenter" do
+      draft           = build(:draft_video)
+      published       = build(:published_video)
+      other_published = build(:published_video)
+
+      presenter = create(:presenter, :videos => [draft, published])
+      other     = create(:presenter, :videos => [other_published])
+
+      expect(presenter.published_videos).to eq([published])
+    end
+  end
+
+  describe "#published?" do
+    context "has no videos" do
+      subject { create(:presenter) }
+
+      it "returns false" do
+        expect(subject).not_to be_published
+      end
+    end
+
+    context "has only published videos" do
+      subject { create(:presenter_with_published_video) }
+
+      it "returns true" do
+        expect(subject).to be_published
+      end
+    end
+
+    context "has only draft videos" do
+      subject { create(:presenter_with_draft_video) }
+
+      it "returns false" do
+        expect(subject).not_to be_published
+      end
+    end
+
+    context "has both pubished and draft videos" do
+      let(:draft)     { create(:draft_video) }
+      let(:published) { create(:published_video) }
+
+      subject { create(:presenter, :videos => [draft, published]) }
+
+      it "returns true" do
+        expect(subject).to be_published
       end
     end
   end
