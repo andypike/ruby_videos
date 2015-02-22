@@ -11,11 +11,16 @@ module Videos
         render
       end
 
+      def show
+        render
+      end
+
       private
 
       property :title
       property :description
       property :cover_url
+      property :embed_code
 
       def subtitle
         link_to model.presenter.name, presenter_path(model.presenter)
@@ -33,6 +38,10 @@ module Videos
         return unless current_user.admin?
 
         link_to("Edit", edit_video_path(model), :class => "btn btn-flat")
+      end
+
+      def original_link
+        link_to("Original Video", model.url, :target => "_blank")
       end
 
       def status
