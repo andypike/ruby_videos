@@ -614,6 +614,10 @@ a.btn-red:focus {
     margin-bottom: 35px
 }
 
+.bg-portfolio {
+  padding-bottom: 80px;
+}
+
 .row-portfolio-last {
     padding-bottom: 80px
 }
@@ -776,23 +780,23 @@ a.btn-red:focus {
 
 }
 
-@media (min-width:768px) {
-  .bg-portfolio {
-      min-height: 1100px
-  }
-}
+// @media (min-width:768px) {
+//   .bg-portfolio {
+//       min-height: 1100px
+//   }
+// }
 
-@media (min-width:992px) {
-  .bg-portfolio {
-      min-height: 1290px
-  }
-}
+// @media (min-width:992px) {
+//   .bg-portfolio {
+//       min-height: 1290px
+//   }
+// }
 
-@media (min-width:1200px) {
-  .bg-portfolio {
-      min-height: 1450px
-  }
-}
+// @media (min-width:1200px) {
+//   .bg-portfolio {
+//       min-height: 1450px
+//   }
+// }
 
 /* QUOTE
    ================================================== */

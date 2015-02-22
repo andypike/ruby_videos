@@ -26,8 +26,6 @@ html lang="en"
           = link_to root_path do
             = image_tag "logo.png", :class => "navbar-brand"
 
-          .logged_in.pull-left Logged in as #{current_user.name}
-
           button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button"
             span.sr-only Toggle navigation
             span.icon-bar
@@ -56,6 +54,7 @@ html lang="en"
               | Made with
               i.fa.fa-heart
               | by #{link_to "Andy Pike", "http://twitter.com/andypike"} 2015.
+            p.logged_in.pull-right Logged in as #{current_user.name}
 
     javascript:
       wow = new WOW(
