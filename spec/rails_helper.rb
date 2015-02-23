@@ -28,4 +28,6 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include PageObjects, :type => :feature
   config.include PageObjectHelpers, :type => :feature
+  config.include MailHelpers
+  config.include Rails.application.routes.url_helpers
 end

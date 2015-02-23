@@ -10,12 +10,14 @@ module Videos
 
     def call
       if form.valid?
-        suggestion = Video.new
-        AutoMapper.new(form).map_to(suggestion).tap do |m|
-          m.save
-          # send notification
+        suggestion = Video.new(:suggestion => true)
 
-          publish(:ok, m)
+        AutoMapper.new(form).map_to(suggestion).tap do |s|
+          s.save
+
+          VideoMailer.suggestion(s).deliver_later
+
+          publish(:ok, s)
         end
       else
         publish(:fail)
