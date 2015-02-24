@@ -5,7 +5,7 @@ module PageObjects
     end
 
     def defaults
-      @defults ||= {
+      @defaults ||= {
         :title        => "All the little things",
         :description  => Faker::Lorem.paragraph,
         :presenter_id => Presenter.first.id,

@@ -37,6 +37,7 @@ group :development, :test do
     :branch => "bring-your-own-debugger"
   gem "pry-byebug"
   gem "faker"
+  gem "letter_opener"
 end
 
 group :development do

@@ -5,7 +5,7 @@ module PageObjects
     end
 
     def defaults
-      {
+      @defaults ||= {
         :name    => "Sandi Metz",
         :twitter => "sandimetz",
         :github  => "torqueforge",

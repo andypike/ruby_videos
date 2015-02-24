@@ -23,6 +23,8 @@ module Videos
       property :embed_code
 
       def subtitle
+        return if model.presenter.blank?
+
         link_to model.presenter.name, presenter_path(model.presenter)
       end
 
@@ -48,6 +50,13 @@ module Videos
         return unless current_user.admin?
 
         content_tag(:div, model.status.titleize, :class => "label label-info")
+      end
+
+      def suggestion
+        return unless current_user.admin?
+        return unless model.suggestion?
+
+        content_tag(:div, "Suggestion", :class => "label label-warning")
       end
     end
   end

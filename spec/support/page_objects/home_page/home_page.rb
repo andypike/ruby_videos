@@ -23,6 +23,10 @@ module PageObjects
     def videos_link
       find_link("See all videos")
     end
+
+    def suggestion_link
+      find_link("Suggest a Video")
+    end
   end
 end
 

@@ -19,4 +19,10 @@ class Video < ActiveRecord::Base
 
     ordered.published
   end
+
+  def presenter_name
+    return "Unknown" if presenter.blank?
+
+    presenter.name
+  end
 end

@@ -163,6 +163,8 @@ GEM
       rails
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.3.0)
+      launchy (~> 2.2)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -346,6 +348,7 @@ DEPENDENCIES
   kaminari
   kaminari-bootstrap (~> 3.0.1)
   launchy
+  letter_opener
   mini_magick
   omniauth-github (~> 1.1.2)
   pg
