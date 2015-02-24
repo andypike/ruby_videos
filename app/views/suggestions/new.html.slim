@@ -1,6 +1,33 @@
-h1 Suggest a Video
+.content-page#suggest-video
+  .container.container-intro
+    .row
+      .col-md-12
+        h1 Suggest a Video
 
-= simple_form_for @form do |f|
-  = f.input :title
-  = f.input :url
-  = f.submit "Suggest"
+        .instructions
+          p
+            | We are always on the lookout for interesting videos related to the
+            |  Ruby programming language. If you would like to suggest a video
+            |  that you think should be included here then please give us the
+            |  details below.
+          p
+            | We look for the following things when considering videos for
+            |  inclusion:
+          ul
+            li Interesting content
+            li Well delivered
+            li Good production quality
+          p
+            | We do not ask for your details when submitting a video because
+            |  we prefer to judge the video on it's merits rather than by who
+            |  may have suggested it. We will only add videos that we feel are
+            |  of high enough quality.
+          p Thank you for suggestion a video!
+
+        = simple_form_for @form do |f|
+          = f.input :title
+          = f.input :url,
+            :label => "URL of Ruby video",
+            :required => true,
+            :hint => "For example: http://youtube.com/watch?v=12345"
+          = f.submit "Suggest"

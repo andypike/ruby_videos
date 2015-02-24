@@ -6,6 +6,7 @@ FactoryGirl.define do
     embed_code  "<embed>code</embed>"
     status      "draft"
     presenter
+    suggestion  false
 
     factory :published_video do
       status "published"
@@ -13,6 +14,11 @@ FactoryGirl.define do
 
     factory :draft_video do
       status "draft"
+    end
+
+    factory :suggested_video do
+      presenter  nil
+      suggestion true
     end
   end
 end

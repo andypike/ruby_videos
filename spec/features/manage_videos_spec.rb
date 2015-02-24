@@ -33,6 +33,16 @@ RSpec.describe "Listing videos" do
       expect(page).to have_content(published.title)
       expect(page).to have_content(draft.title)
     end
+
+    it "displays suggestions" do
+      suggestion = create(:suggested_video)
+
+      main_menu.login_as(:admin)
+      home_page.videos_link.click
+
+      expect(page).to have_content(suggestion.title)
+      expect(page).to have_content(/suggestion/i)
+    end
   end
 end
 
