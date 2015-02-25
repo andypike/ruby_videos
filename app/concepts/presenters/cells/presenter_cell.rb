@@ -42,6 +42,22 @@ module Presenters
         link_to("GitHub", github_url, :class => "btn btn-flat")
       end
 
+      def twitter_icon
+        return if model.twitter.blank?
+
+        link_to(twitter_url) do
+          content_tag(:i, "", :class => "fa fa-twitter team-icon team-t")
+        end
+      end
+
+      def github_icon
+        return if model.github.blank?
+
+        link_to(github_url) do
+          content_tag(:i, "", :class => "fa fa-github team-icon team-d")
+        end
+      end
+
       def edit_link
         return unless current_user.admin?
 
