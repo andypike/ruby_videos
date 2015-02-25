@@ -4,9 +4,10 @@ FactoryGirl.define do
     description "Blah blah blah blah blah blah blah"
     url         "http://youtube.com/12345"
     embed_code  "<embed>code</embed>"
-    status      "draft"
+    status      "published"
     presenter
     suggestion  false
+    association :user, :factory => :user_with_random_uid
 
     factory :published_video do
       status "published"

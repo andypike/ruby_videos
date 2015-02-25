@@ -5,6 +5,7 @@ class Video < ActiveRecord::Base
   mount_uploader :cover, Videos::CoverUploader
 
   belongs_to :presenter
+  belongs_to :user
 
   enum :status => %i(draft published)
 

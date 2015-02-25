@@ -4,6 +4,7 @@ RSpec.describe Videos::CreateSuggestion do
   let(:listener) { double.as_null_object }
   let(:video)    { Video.first }
   let(:form)     { Videos::SuggestionForm.build_from(:suggestion, params) }
+  let(:user)     { create(:user) }
   let(:params) do
     {
       :suggestion => {
@@ -13,7 +14,7 @@ RSpec.describe Videos::CreateSuggestion do
     }
   end
 
-  subject { Videos::CreateSuggestion.new(form) }
+  subject { Videos::CreateSuggestion.new(form, user) }
 
   before { subject.subscribe(listener) }
 
@@ -41,6 +42,10 @@ RSpec.describe Videos::CreateSuggestion do
 
       it "sets the video as a suggestion" do
         expect(video).to be_suggestion
+      end
+
+      it "stores the user that made the suggestion" do
+        expect(video.user).to eq(user)
       end
 
       it "sends an email notification" do

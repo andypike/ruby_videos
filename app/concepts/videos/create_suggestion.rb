@@ -2,10 +2,11 @@ module Videos
   class CreateSuggestion
     include Wisper::Publisher
 
-    attr_reader :form
+    attr_reader :form, :user
 
-    def initialize(form)
+    def initialize(form, user)
       @form = form
+      @user = user
     end
 
     def call
@@ -13,6 +14,7 @@ module Videos
         suggestion = Video.new(:suggestion => true)
 
         AutoMapper.new(form).map_to(suggestion).tap do |s|
+          s.user = user
           s.save
 
           VideoMailer.suggestion(s).deliver_later
