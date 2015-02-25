@@ -141,6 +141,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
+    google-analytics-rails (0.0.6)
     grit (2.5.0)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
@@ -343,6 +344,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   friendly_id (~> 5.1.0)
+  google-analytics-rails
   jazz_hands!
   jquery-rails
   kaminari
