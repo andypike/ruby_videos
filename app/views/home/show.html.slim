@@ -12,8 +12,8 @@
             = image_tag "browser-slider/browser.png", :class => "img-browser"
             .wrapper-sl.wrapper-browser
               ul#slider-intro.slider
-                li= image_tag "browser-slider/652x340.gif"
-                li= image_tag "browser-slider/652x340.gif"
+                - @videos.sample(3).each do |v|
+                  li= image_tag v.cover_url
               .wrapper-nav
                 .div-p.div-p-browser
                   i#p-intro
