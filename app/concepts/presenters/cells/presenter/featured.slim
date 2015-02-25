@@ -2,10 +2,8 @@
   .wrapper-team-pic
     = image_tag photo_url, :class => "img-team"
     .team-hover-bg
-    = link_to twitter_url do
-      i.fa.fa-twitter.team-icon.team-t
-    = link_to github_url do
-      i.fa.fa-github.team-icon.team-d
+    = twitter_icon
+    = github_icon
   h2.team-title
     = show_link
   h3.team-subtitle= title
