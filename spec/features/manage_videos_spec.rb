@@ -131,7 +131,7 @@ RSpec.describe "Edit a video" do
     context "with valid data" do
       it "populates the form" do
         expect(edit_video_page.field(:title)).to eq(video.title)
-        expect(edit_video_page.field(:status)).to eq("draft")
+        expect(edit_video_page.field(:status)).to eq("published")
       end
 
       it "allows the video to be updated" do

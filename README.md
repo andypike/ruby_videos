@@ -44,7 +44,7 @@ building the app. These may change over time.
 
 These are the entry point to our application. They deal with HTTP concerns such
 as reading the input, redirecting and rendering. They cannot contain business
-logic. To perform business logic they must call an Operation (one per action if
+logic. To perform business logic they must call a Command (one per action if
 possible).
 
 #### Models
@@ -55,19 +55,20 @@ So these models should only contain the relationship bindings (`belongs_to`,
 with data access. AR models are the only classes that can call AR query methods
 such as `#where` etc.
 
-#### Operations
+#### Commands
 
 A class that is responsible for the business logic of a single task in the
-system and should be named using verbs. For example, `PlaceOrder`,
-`RegisterUser` or  `PublishArticle`. These classes should have no knowledge of
-HTTP or how to query the database. If they require data they can only call
-AR-model query methods are defined in the model class not built in AR calls such
-as `#where` etc. The only exceptions to this are `#find(id)` or `#find_by`.
+system and should be named using verbs (Trailblazer calls these Operations).
+For example, `PlaceOrder`, `RegisterUser` or  `PublishArticle`. These classes
+should have no knowledge of HTTP or how to query the database. If they require
+data they can only call AR-model query methods are defined in the model class
+not built in AR calls such as `#where` etc. The only exceptions to this are
+`#find(id)` or `#find_by`.
 
-If an Operation needs to update/insert then they can use the normal AR methods
+If a Command needs to update/insert then they can use the normal AR methods
 (`#create`, `#save`, `update`, etc).
 
-Operations should be namespaced by concept. A concept may be a thing in the
+Commands should be namespaced by concept. A concept may be a thing in the
 system such as User or something more abstract like Security. Concepts don't
 have to be mapped to your AR models but they can be.
 

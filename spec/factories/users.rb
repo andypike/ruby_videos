@@ -14,5 +14,9 @@ FactoryGirl.define do
     factory :viewer do
       role "viewer"
     end
+
+    factory :user_with_random_uid do
+      uid SecureRandom.uuid
+    end
   end
 end
