@@ -1,6 +1,9 @@
 form {
+  margin-top: 40px;
+
   input[type=submit] {
     @extend .btn;
     @extend .btn-primary;
+    margin-top: 40px;
   }
 }

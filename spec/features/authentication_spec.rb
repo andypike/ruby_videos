@@ -18,6 +18,10 @@ RSpec.describe "Authentication" do
       it "hides the login link" do
         expect(main_menu.login_link).not_to be_present
       end
+
+      it "navigates to the user's profile page" do
+        expect(home_page).to be_current_page
+      end
     end
 
     context "with invalid OmniAuth hash" do
@@ -27,6 +31,10 @@ RSpec.describe "Authentication" do
         main_menu.login_as(:visitor)
 
         expect(page).to have_content(/unable to login/i)
+      end
+
+      it "navigates to the home page" do
+        expect(home_page).to be_current_page
       end
     end
   end
@@ -41,6 +49,10 @@ RSpec.describe "Authentication" do
 
     it "hides the logout link" do
       expect(main_menu.logout_link).not_to be_present
+    end
+
+    it "navigates to the home page" do
+      expect(home_page).to be_current_page
     end
   end
 end

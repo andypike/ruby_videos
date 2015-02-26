@@ -6,6 +6,7 @@ FactoryGirl.define do
     provider  "github"
     uid       "12345"
     role      "viewer"
+    opted_into_newsletters true
 
     factory :admin do
       role "admin"

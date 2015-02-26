@@ -14,6 +14,10 @@ module PageObjects
     def logout_link
       find_link("Logout")
     end
+
+    def profile_link
+      find_link("Profile")
+    end
   end
 end
 
