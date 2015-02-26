@@ -21,6 +21,7 @@ module Videos
       property :description
       property :cover_url
       property :embed_code
+      property :presenter_name
 
       def subtitle
         return if model.presenter.blank?
