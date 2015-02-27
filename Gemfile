@@ -26,6 +26,7 @@ gem "google-analytics-rails"
 gem "unicorn"
 gem "font-awesome-rails"
 gem "redcarpet"
+gem "newrelic_rpm"
 
 group :development, :test do
   gem "web-console", "~> 2.0"
