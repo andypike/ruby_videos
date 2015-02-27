@@ -19,6 +19,10 @@ module PageObjects
       MissingElement.new(:link, label)
     end
 
+    def current_page?
+      current_path.eql?(path)
+    end
+
     def respond_to_missing?(name, _)
       context.respond_to?(name)
     end

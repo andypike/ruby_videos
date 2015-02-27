@@ -77,7 +77,7 @@ RSpec.describe "Adding a presenter" do
         add_presenter_page.fill_in_form(:name => "x" * 256)
         add_presenter_page.submit_form
 
-        expect(add_presenter_page.field(:name)).to eq("x" * 256)
+        expect(add_presenter_page.field(:name).value).to eq("x" * 256)
       end
     end
   end
@@ -118,7 +118,7 @@ RSpec.describe "Edit a presenter" do
 
     context "with valid data" do
       it "populates the form" do
-        expect(edit_presenter_page.field(:name)).to eq(presenter.name)
+        expect(edit_presenter_page.field(:name).value).to eq(presenter.name)
       end
 
       it "allows the presenter to be updated" do
@@ -146,7 +146,7 @@ RSpec.describe "Edit a presenter" do
         edit_presenter_page.fill_in_form(:name => "x" * 256)
         edit_presenter_page.submit_form
 
-        expect(edit_presenter_page.field(:name)).to eq("x" * 256)
+        expect(edit_presenter_page.field(:name).value).to eq("x" * 256)
       end
     end
   end

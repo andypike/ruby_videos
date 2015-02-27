@@ -89,7 +89,7 @@ RSpec.describe "Adding a video" do
         add_video_page.fill_in_form(:title => "x" * 256)
         add_video_page.submit_form
 
-        expect(add_video_page.field(:title)).to eq("x" * 256)
+        expect(add_video_page.field(:title).value).to eq("x" * 256)
       end
     end
   end
@@ -130,8 +130,8 @@ RSpec.describe "Edit a video" do
 
     context "with valid data" do
       it "populates the form" do
-        expect(edit_video_page.field(:title)).to eq(video.title)
-        expect(edit_video_page.field(:status)).to eq("published")
+        expect(edit_video_page.field(:title).value).to eq(video.title)
+        expect(edit_video_page.field(:status).value).to eq("published")
       end
 
       it "allows the video to be updated" do
@@ -159,7 +159,7 @@ RSpec.describe "Edit a video" do
         edit_video_page.fill_in_form(:title => "x" * 256)
         edit_video_page.submit_form
 
-        expect(edit_video_page.field(:title)).to eq("x" * 256)
+        expect(edit_video_page.field(:title).value).to eq("x" * 256)
       end
     end
   end

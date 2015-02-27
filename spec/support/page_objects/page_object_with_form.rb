@@ -6,7 +6,7 @@ module PageObjects
     end
 
     def field(attribute)
-      find_field(id_for(attribute)).value
+      find_field(id_for(attribute))
     end
 
     def submit_form
@@ -26,6 +26,8 @@ module PageObjects
           attach_file id, value
         when :select
           find_by_id(id).find("option[value='#{value}']").select_option
+        when :checkbox
+          find_by_id(id).set(value)
         else
           fill_in id, :with => value
         end

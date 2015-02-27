@@ -5,6 +5,7 @@ ul.nav.navbar-nav.navbar-right
 
 
   - if current_user.authenticated?
+    li= link_to "Profile", edit_profile_path
     li= link_to "Logout", session_path, :method => :delete
   - else
     li= link_to "Login with GitHub", "/auth/github"

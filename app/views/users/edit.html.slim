@@ -1,0 +1,11 @@
+.content-page#profile
+  .container.container-intro
+    .row
+      .col-md-12
+        h1 Your Profile
+
+        = simple_form_for @form do |f|
+          = f.input :opted_into_newsletters,
+            :as => :boolean,
+            :label => "Send me updates of new videos periodically"
+          = f.submit "Save"

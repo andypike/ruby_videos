@@ -1,7 +1,11 @@
 module PageObjects
   class HomePage < PageObject
     def open
-      visit context.root_path
+      visit path
+    end
+
+    def path
+      root_path
     end
 
     def presenters
