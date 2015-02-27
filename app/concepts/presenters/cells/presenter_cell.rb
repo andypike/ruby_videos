@@ -20,7 +20,6 @@ module Presenters
       private
 
       property :name
-      property :title
       property :photo_url
 
       def bio

@@ -6,7 +6,6 @@ module Presenters
     attribute :twitter, :string, :default => ""
     attribute :github,  :string, :default => ""
     attribute :website, :string, :default => ""
-    attribute :title,   :string, :default => ""
     attribute :bio,     :text,   :default => ""
     attribute :photo,   :file,   :default => ""
 
