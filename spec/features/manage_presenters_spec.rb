@@ -192,6 +192,7 @@ RSpec.describe "View a presenter" do
     before do
       home_page.open
       main_menu.login_as(user)
+      presenters_page.open
       presenters_page.presenter_link(presenter).click
     end
 
