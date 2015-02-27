@@ -276,6 +276,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     raindrops (0.13.0)
     rake (10.4.2)
+    redcarpet (3.2.1)
     representable (2.1.5)
       multi_json
       nokogiri
@@ -396,6 +397,7 @@ DEPENDENCIES
   pry-byebug
   quiet_assets
   rails (= 4.2.0)
+  redcarpet
   rspec-collection_matchers (~> 1.1.2)
   rspec-rails (~> 3.2.0)
   sass-rails (~> 5.0.1)

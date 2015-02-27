@@ -1,6 +1,8 @@
 module Videos
   module Cells
     class VideoCell < Cell::ViewModel
+      include ApplicationHelper
+
       delegate :current_user, :to => :controller
 
       def latest
@@ -18,10 +20,13 @@ module Videos
       private
 
       property :title
-      property :description
       property :cover_url
       property :embed_code
       property :presenter_name
+
+      def description
+        markdown(model.description)
+      end
 
       def subtitle
         return if model.presenter.blank?

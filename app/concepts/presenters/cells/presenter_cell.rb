@@ -1,6 +1,8 @@
 module Presenters
   module Cells
     class PresenterCell < Cell::ViewModel
+      include ApplicationHelper
+
       delegate :current_user, :to => :controller
 
       def featured
@@ -18,9 +20,12 @@ module Presenters
       private
 
       property :name
-      property :bio
       property :title
       property :photo_url
+
+      def bio
+        markdown(model.bio)
+      end
 
       def twitter_url
         "http://twitter.com/#{model.twitter}"

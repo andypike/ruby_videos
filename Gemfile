@@ -25,6 +25,7 @@ gem "friendly_id",        "~> 5.1.0"
 gem "google-analytics-rails"
 gem "unicorn"
 gem "font-awesome-rails"
+gem "redcarpet"
 
 group :development, :test do
   gem "web-console", "~> 2.0"
