@@ -12,7 +12,7 @@ class CRUD
     if form.valid?
       AutoMapper.new(form).map_to(model).tap do |m|
         m.user = user unless user == :anonymous
-        m.save
+        m.save!
         publish(:ok, m)
       end
     else

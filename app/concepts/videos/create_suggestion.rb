@@ -15,7 +15,7 @@ module Videos
 
         AutoMapper.new(form).map_to(suggestion).tap do |s|
           s.user = user
-          s.save
+          s.save!
 
           VideoMailer.suggestion(s).deliver_later
 

@@ -12,7 +12,7 @@ module Users
     def call
       if form.valid?
         AutoMapper.new(form).map_to(user).tap do |u|
-          u.save
+          u.save!
 
           publish(:ok, u)
         end
