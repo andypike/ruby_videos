@@ -42,6 +42,12 @@ module Presenters
         link_to("GitHub", github_url, :class => "btn btn-flat")
       end
 
+      def website_link
+        return if model.website.blank?
+
+        link_to("Website", model.website, :class => "btn btn-flat")
+      end
+
       def twitter_icon
         return if model.twitter.blank?
 
