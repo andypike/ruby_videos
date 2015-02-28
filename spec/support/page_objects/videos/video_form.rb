@@ -12,7 +12,8 @@ module PageObjects
         :url          => Faker::Internet.url,
         :embed_code   => "<embed><embed>",
         :status       => "draft",
-        :cover        => File.expand_path("spec/support/files/image.jpg")
+        :cover        => File.expand_path("spec/support/files/image.jpg"),
+        :slides_url   => Faker::Internet.url
       }
     end
   end
