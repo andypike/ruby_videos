@@ -46,6 +46,17 @@ namespace :deploy do
     end
   end
 
+  task :notify_rollbar do
+    on roles(:app) do |h|
+      revision = `git log -n 1 --pretty=format:"%H"`
+      local_user = `whoami`
+      rollbar_token = ENV["ROLLBAR_ACCESS_TOKEN"]
+      rails_env = fetch(:rails_env, "production")
+      execute "curl https://api.rollbar.com/api/1/deploy/ -F access_token=#{rollbar_token} -F environment=#{rails_env} -F revision=#{revision} -F local_username=#{local_user} >/dev/null 2>&1", :once => true
+    end
+  end
+
   after :finishing, "deploy:cleanup"
   after :finished,  "deploy:restart"
+  after :deploy, "deploy:notify_rollbar"
 end

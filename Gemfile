@@ -27,6 +27,7 @@ gem "unicorn"
 gem "font-awesome-rails"
 gem "redcarpet"
 gem "newrelic_rpm"
+gem "rollbar", "~> 1.4.4"
 
 group :development, :test do
   gem "web-console", "~> 2.0"
