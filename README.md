@@ -7,24 +7,22 @@
 A curated listing of quality videos about or related to the Ruby programming
 language.
 
-## Setup
+This will help promote speakers, events and sponsors and will help Ruby
+programmers. I've been keeping a list of quality videos that I've watched and
+thought it might be a good idea to put it online and allow others to see the
+same create videos.
 
-```
-git clone git@github.com:andypike/ruby_videos.git
-cd ruby_videos
-cp config/example.database.yml config/database.yml
-cp example.env .env
-  * Add your development details to .env
-psql postgres
-# create user ruby_videos with password '' CREATEDB;
-# \q
-bundle
-rake db:create db:migrate db:seed
-rake db:create db:migrate RAILS_ENV=test
-rails s
-```
+If you have a suggestion for a video, [please suggest](http://rubyvideos.com/suggestions/new).
+
+If one of your videos is listed on the site and there is something you do not
+like about it (description, bio, photo, etc) then please
+[drop me a tweet @rubyvideos_](http://twitter.com/rubyvideos_) and I'll be happy
+to make the changes. Similarly, if you would like your video removed, just let
+me know.
 
 ## Why?
+
+**This coding style is experimental**
 
 I wanted a simple project that I could experiment around with and try out some
 different things. There is also a [Trailblazer version](https://github.com/andypike/ruby_videos_trailblazer)
@@ -32,6 +30,13 @@ of this project that I started first. The reason for this project is that I like
 many on the concepts in [Trailblazer](https://github.com/apotonick/trailblazer)
 but also wondered if I could do something similar with just standard Rails and
 POROs (with a few lightweight gems).
+
+Although this project is pretty simple, a lot of the code looks overkill for the
+project. That is expected at this stage. I wanted to experiment around with this
+style to see how it might turn out and having a real project is the best way to
+do that. I'm hoping to expand this project over time and see how easy it is to
+change with this architecture. I'm hoping that separating responsibilities will
+make change easy later.
 
 ### Responsibilities
 
@@ -140,3 +145,25 @@ out simple and then increase in complexity over time. What I am trying to do
 here is to create a structure that consists of many small parts, each with their
 own single responsibility. As the app increases in complexity, this should
 provide a solid foundation for future change.
+
+## Contributing
+
+If you would like to contribute, please create a feature branch and send in your
+pull requests.
+
+## Setup
+
+```
+git clone git@github.com:andypike/ruby_videos.git
+cd ruby_videos
+cp config/example.database.yml config/database.yml
+cp example.env .env
+  * Add your development details to .env
+psql postgres
+# create user ruby_videos with password '' CREATEDB;
+# \q
+bundle
+rake db:create db:migrate db:seed
+rake db:create db:migrate RAILS_ENV=test
+rails s
+```
