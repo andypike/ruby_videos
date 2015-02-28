@@ -9,6 +9,7 @@ module Videos
     attribute :embed_code,   :text,   :default => ""
     attribute :status,       :string, :default => "draft"
     attribute :cover,        :file,   :default => ""
+    attribute :slides_url,   :string, :default => ""
 
     validates :title,
       :length   => { :maximum => 255 },

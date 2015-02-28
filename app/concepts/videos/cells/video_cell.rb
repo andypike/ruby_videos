@@ -49,7 +49,19 @@ module Videos
       end
 
       def original_link
-        link_to("Original Video", model.url, :target => "_blank")
+        link_to("Original Video", model.url,
+          :class  => "btn btn-flat",
+          :target => "_blank"
+        )
+      end
+
+      def slides_link
+        return if model.slides_url.blank?
+
+        link_to("Slides", model.slides_url,
+          :class  => "btn btn-flat",
+          :target => "_blank"
+        )
       end
 
       def status
