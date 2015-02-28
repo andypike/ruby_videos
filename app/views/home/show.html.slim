@@ -13,7 +13,7 @@
             .wrapper-sl.wrapper-browser
               ul#slider-intro.slider
                 - @videos.sample(3).each do |v|
-                  li= image_tag v.cover_url
+                  li= link_to image_tag(v.cover_url), video_path(v), :title => v.title
               .wrapper-nav
                 .div-p.div-p-browser
                   i#p-intro
