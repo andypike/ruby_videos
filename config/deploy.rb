@@ -11,7 +11,7 @@ set :pty,              true
 set :keep_releases,    5
 set :rbenv_ruby,       "2.1.5"
 set :linked_files,     %w(config/database.yml)
-set :linked_dirs,      %w(log)
+set :linked_dirs,      %w(log public/uploads)
 
 namespace :deploy do
   desc "Restart application"
