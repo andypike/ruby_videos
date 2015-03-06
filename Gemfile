@@ -45,6 +45,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "faker"
   gem "letter_opener"
+  gem "database_cleaner"
 end
 
 group :development do
