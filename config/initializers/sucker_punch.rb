@@ -1,3 +1,7 @@
 Rails.application.configure do
-  config.active_job.queue_adapter = :sucker_punch
+  if Rails.env.test?
+    config.active_job.queue_adapter = :inline
+  else
+    config.active_job.queue_adapter = :sucker_punch
+  end
 end

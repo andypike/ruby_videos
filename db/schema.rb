@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20150228120537) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+  enable_extension "temporal_tables"
 
   create_table "presenters", force: :cascade do |t|
     t.string   "name",       default: "", null: false
