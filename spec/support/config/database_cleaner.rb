@@ -7,7 +7,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, :job => true) do
+  config.before(:each, :async => true) do
     DatabaseCleaner.strategy = :truncation
   end
 
