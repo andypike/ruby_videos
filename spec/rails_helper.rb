@@ -5,6 +5,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rspec/rails"
 require "capybara/rails"
 require "capybara/rspec"
+require "sucker_punch/testing/inline"
 
 require "support/page_objects/page_object"
 require "support/page_objects/page_object_with_form"
@@ -19,7 +20,7 @@ Capybara.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.disable_monkey_patching!
   config.infer_base_class_for_anonymous_controllers = false

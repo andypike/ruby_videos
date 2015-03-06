@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Suggesting a video" do
+RSpec.describe "Suggesting a video", :async => true do
   before do
     home_page.open
     main_menu.login_as(user)
