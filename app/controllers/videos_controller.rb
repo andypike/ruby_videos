@@ -16,6 +16,8 @@ class VideosController < ApplicationController
   end
 
   def create
+    Rollbar.info("is this thing on?")
+
     @form = Videos::Form.build_from(:video, params)
 
     Videos::Create.new(@form, current_user)
