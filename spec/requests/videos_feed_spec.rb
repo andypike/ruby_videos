@@ -1,17 +1,15 @@
 require "rails_helper"
 
 RSpec.describe "Videos Feed" do
-
   let!(:video) do
     create(:published_video,
-      :updated_at => DateTime.new(2015, 6, 9))
+      :updated_at => DateTime.new(2015, 6, 9)
+    )
   end
 
-  before do
-    get videos_path, :format => :atom
-  end
+  before { get videos_path, :format => :atom }
 
-  let(:feed) { Hash.from_xml(response.body)["feed"] }
+  let(:feed)  { Hash.from_xml(response.body)["feed"] }
   let(:entry) { feed["entry"] }
 
   it "returns valid atom feed" do
@@ -25,5 +23,4 @@ RSpec.describe "Videos Feed" do
     expect(entry["title"]).to eq(video.title)
     expect(entry["updated"]).to match(/2015-06-09.*00Z/)
   end
-
 end
