@@ -17,13 +17,13 @@ RSpec.describe "Videos Feed", :type => :request do
   it "returns valid atom feed" do
     expect(feed["id"]).to eq(root_url)
     expect(feed["title"]).to eq("Ruby Videos")
-    expect(feed["updated"]).to match(/2015-06-09/)
+    expect(feed["updated"]).to match(/2015-06-09.*00Z/)
   end
 
   it "returns feed containing valid entry" do
     expect(entry["id"]).to eq(video_url(video))
     expect(entry["title"]).to eq(video.title)
-    expect(entry["updated"]).to match(/2015-06-09/)
+    expect(entry["updated"]).to match(/2015-06-09.*00Z/)
   end
 
 end
