@@ -3,6 +3,11 @@ class VideosController < ApplicationController
 
   def index
     @videos = Video.list_for(current_user).page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.atom { render :layout => false }
+    end
   end
 
   def show

@@ -14,6 +14,7 @@ html lang="en"
     = stylesheet_link_tag    "http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700,300,800"
     = javascript_include_tag "application"
     = csrf_meta_tags
+    = auto_discovery_link_tag(:rss, videos_url(:format => :atom))
     = analytics_init if Rails.env.production?
 
     /![if lt IE 9]
@@ -47,6 +48,8 @@ html lang="en"
                 i.fa.fa-twitter.twitter-footer.wow.bounce data-wow-delay="0.2s"
               a href="https://github.com/andypike/ruby_videos" target="_blank"
                 i.fa.fa-github.github-footer.wow.bounce data-wow-delay="0.2s"
+              = link_to videos_url(:format => :atom), :target => :blank do
+                i.fa.fa-rss.rss-footer.wow.bounce data-wow-delay="0.2s"
     .bg-footer-bottom
       .container
         .row-footer-bottom.row

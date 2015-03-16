@@ -13,6 +13,10 @@ module Videos
         render
       end
 
+      def feed
+        render
+      end
+
       def show
         render
       end
@@ -34,12 +38,20 @@ module Videos
         link_to model.presenter.name, presenter_path(model.presenter)
       end
 
+      def updated_formatted
+        model.updated_at.iso8601
+      end
+
       def show_link
         link_to title, show_path
       end
 
       def show_path
         video_path(model.to_param)
+      end
+
+      def show_url
+        video_url(model.to_param)
       end
 
       def edit_link
