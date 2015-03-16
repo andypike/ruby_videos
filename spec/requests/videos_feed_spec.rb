@@ -1,14 +1,14 @@
 require "rails_helper"
 
-RSpec.describe "Videos Feed", :type => :request do
+RSpec.describe "Videos Feed" do
 
   let!(:video) do
     create(:published_video,
-           :updated_at => DateTime.new(2015, 6, 9))
+      :updated_at => DateTime.new(2015, 6, 9))
   end
 
   before do
-    get videos_path, format: :atom
+    get videos_path, :format => :atom
   end
 
   let(:feed) { Hash.from_xml(response.body)["feed"] }
