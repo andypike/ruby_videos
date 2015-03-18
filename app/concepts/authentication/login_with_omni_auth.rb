@@ -2,15 +2,18 @@ module Authentication
   class LoginWithOmniAuth
     include Wisper::Publisher
 
-    attr_reader :info
+    attr_reader :info, :warden
 
-    def initialize(info)
+    def initialize(info, warden)
       @info = info
+      @warden = warden
     end
 
     def call
       if info.valid?
         user = find_or_create_user
+        warden.login(user)
+
         publish(:ok, user)
       else
         publish(:fail)

@@ -2,21 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery :with => :exception
   helper_method :current_user
 
-  CURRENT_USER_KEY = :user_id
-
   def current_user
-    if session[CURRENT_USER_KEY].present?
-      @current_user ||= User.find_by(:id => session[CURRENT_USER_KEY])
-    end
-
-    @current_user || GuestUser.new
+    @current_user ||= warden.current_user
   end
 
   private
 
-  def set_current_user(user, notice)
-    session[CURRENT_USER_KEY] = user.id
-    redirect_to root_path, :notice => t(notice)
+  def warden
+    @warden ||= Authentication::Warden.new(session)
   end
 
   def ensure_admin
