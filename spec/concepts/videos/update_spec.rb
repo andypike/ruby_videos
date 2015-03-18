@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Videos::Update do
-  let(:listener) { double.as_null_object }
+  let(:listener) { spy }
   let(:video)    { create(:video, :title => "All the little things") }
   let(:form)     { Videos::Form.build_from(:video, params) }
   let(:params) do

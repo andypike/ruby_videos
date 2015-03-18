@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Authentication::LoginWithOmniAuth do
-  let(:listener) { double.as_null_object }
+  let(:listener) { spy }
   let(:valid_info) do
     instance_double("Authentication::OmniAuthInfo",
       :provider  => "github",

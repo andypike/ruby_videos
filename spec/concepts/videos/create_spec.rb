@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Videos::Create do
-  let(:listener)  { double.as_null_object }
+  let(:listener)  { spy }
   let(:video)     { Video.first }
   let(:form)      { Videos::Form.build_from(:video, params) }
   let(:user)      { create(:user) }
