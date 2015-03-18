@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Presenters::Update do
-  let(:listener)  { double.as_null_object }
+  let(:listener)  { spy }
   let(:presenter) { create(:presenter, :name => "Bob Smith") }
   let(:form)      { Presenters::Form.build_from(:presenter, params) }
   let(:params) do

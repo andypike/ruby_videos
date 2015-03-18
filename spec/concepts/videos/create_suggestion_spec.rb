@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Videos::CreateSuggestion, :async => true do
-  let(:listener) { double.as_null_object }
+  let(:listener) { spy }
   let(:video)    { Video.first }
   let(:form)     { Videos::SuggestionForm.build_from(:suggestion, params) }
   let(:user)     { create(:user) }
