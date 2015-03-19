@@ -17,12 +17,13 @@ RSpec.describe Authentication::LoginWithOmniAuth do
       :valid? => false
     )
   end
-  let(:user) { User.first }
+  let(:user)   { User.first }
+  let(:warden) { spy }
 
   before  { subject.subscribe(listener) }
 
   context "with valid info" do
-    subject { Authentication::LoginWithOmniAuth.new(valid_info) }
+    subject { Authentication::LoginWithOmniAuth.new(valid_info, warden) }
 
     context "when the user doesn't have an account" do
       it "creates a new user" do
@@ -49,6 +50,10 @@ RSpec.describe Authentication::LoginWithOmniAuth do
         it "publishes the :ok event" do
           expect(listener).to have_received(:ok).with(user)
         end
+
+        it "logs in the user" do
+          expect(warden).to have_received(:login).with(user)
+        end
       end
     end
 
@@ -64,11 +69,21 @@ RSpec.describe Authentication::LoginWithOmniAuth do
 
         expect(listener).to have_received(:ok).with(user)
       end
+
+      it "logs in the user" do
+        subject.call
+
+        expect(warden).to have_received(:login).with(user)
+      end
     end
   end
 
   context "with invalid info" do
-    subject { Authentication::LoginWithOmniAuth.new(invalid_info) }
+    subject { Authentication::LoginWithOmniAuth.new(invalid_info, warden) }
+
+    it "doesn't create a new user" do
+      expect { subject.call }.not_to change(User, :count)
+    end
 
     it "publishes the :fail event" do
       subject.call
@@ -76,8 +91,10 @@ RSpec.describe Authentication::LoginWithOmniAuth do
       expect(listener).to have_received(:fail)
     end
 
-    it "doesn't create a new user" do
-      expect { subject.call }.not_to change(User, :count)
+    it "doesn't log in the user" do
+      subject.call
+
+      expect(warden).not_to have_received(:login)
     end
   end
 end
