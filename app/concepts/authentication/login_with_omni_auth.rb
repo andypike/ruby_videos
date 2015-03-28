@@ -25,10 +25,8 @@ module Authentication
     def find_or_create_user
       uid_and_provider = { :uid => info.uid, :provider => info.provider }
 
-      User.find_or_create_by(uid_and_provider) do |u|
-        u.name      = info.name
-        u.nickname  = info.nickname
-        u.image_url = info.image_url
+      User.find_or_create_by(uid_and_provider) do |user|
+        AutoMapper.new(info).map_to(user)
       end
     end
   end
