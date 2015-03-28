@@ -1,24 +1,21 @@
 require "rails_helper"
 
 RSpec.describe Authentication::LoginWithOmniAuth do
+  let(:user)     { User.first }
+  let(:warden)   { spy }
   let(:listener) { spy }
+  let(:invalid_info) { Authentication::OmniAuthInfo.new }
   let(:valid_info) do
-    instance_double("Authentication::OmniAuthInfo",
-      :provider  => "github",
-      :uid       => "12345",
-      :nickname  => "andy",
-      :name      => "Andy",
-      :image_url => "http://image.com/12345.png",
-      :valid?    => true
+    Authentication::OmniAuthInfo.new(
+      :provider => "github",
+      :uid      => "12345",
+      :info     => {
+        :nickname => "andy",
+        :name     => "Andy",
+        :image    => "http://image.com/12345.png"
+      }
     )
   end
-  let(:invalid_info) do
-    instance_double("Authentication::OmniAuthInfo",
-      :valid? => false
-    )
-  end
-  let(:user)   { User.first }
-  let(:warden) { spy }
 
   before  { subject.subscribe(listener) }
 
