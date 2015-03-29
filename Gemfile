@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "rails",           "4.2.0"
+gem "rails",           "4.2.1"
 gem "pg"
 gem "sass-rails",      "~> 5.0.1"
 gem "uglifier",        ">= 1.3.0"
@@ -51,7 +51,7 @@ end
 group :development do
   gem "dotenv-rails"
   gem "quiet_assets"
-  gem "capistrano",         "~> 3.3.3"
+  gem "capistrano",         "~> 3.4.0"
   gem "capistrano-rails-console"
   gem "capistrano-rails",   "~> 1.1.2"
   gem "capistrano-bundler", "~> 1.1.3"
