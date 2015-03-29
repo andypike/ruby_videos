@@ -9,7 +9,7 @@ set :branch,           "master"
 set :deploy_via,       :remote_cache
 set :pty,              true
 set :keep_releases,    5
-set :rbenv_ruby,       "2.1.5"
+set :rbenv_ruby,       "2.2.1"
 set :linked_files,     %w(config/database.yml)
 set :linked_dirs,      %w(log public/uploads)
 
