@@ -1,9 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Authentication::LoginWithOmniAuth do
-  let(:user)     { User.first }
-  let(:warden)   { spy }
-  let(:listener) { spy }
+  let(:user)   { User.first }
+  let(:warden) { spy }
   let(:invalid_info) { Authentication::OmniAuthInfo.new }
   let(:valid_info) do
     Authentication::OmniAuthInfo.new(
@@ -17,18 +16,23 @@ RSpec.describe Authentication::LoginWithOmniAuth do
     )
   end
 
-  before  { subject.subscribe(listener) }
+  let(:ok)   { Nala::BlockSpy.new }
+  let(:fail) { Nala::BlockSpy.new }
 
   context "with valid info" do
-    subject { Authentication::LoginWithOmniAuth.new(valid_info, warden) }
+    subject do
+      Authentication::LoginWithOmniAuth.call(valid_info, warden)
+        .on(:ok, &ok.spy)
+        .on(:fail, &fail.spy)
+    end
 
     context "when the user doesn't have an account" do
       it "creates a new user" do
-        expect { subject.call }.to change(User, :count).by(1)
+        expect { subject }.to change(User, :count).by(1)
       end
 
       describe "it also" do
-        before { subject.call }
+        before { subject }
 
         it "sets the user as a viewer" do
           expect(user).to be_viewer
@@ -45,11 +49,15 @@ RSpec.describe Authentication::LoginWithOmniAuth do
         end
 
         it "publishes the :ok event" do
-          expect(listener).to have_received(:ok).with(user)
+          expect(ok).to be_called_with(user)
         end
 
         it "logs in the user" do
           expect(warden).to have_received(:login).with(user)
+        end
+
+        it "doesn't publish the :fail event" do
+          expect(fail).not_to be_called
         end
       end
     end
@@ -58,40 +66,48 @@ RSpec.describe Authentication::LoginWithOmniAuth do
       it "doesn't create a new user" do
         create(:user, :uid => "12345", :provider => "github")
 
-        expect { subject.call }.not_to change(User, :count)
+        expect { subject }.not_to change(User, :count)
       end
 
-      it "publishes the :ok event" do
-        subject.call
+      describe "it also" do
+        before { subject }
 
-        expect(listener).to have_received(:ok).with(user)
-      end
+        it "publishes the :ok event" do
+          expect(ok).to be_called_with(user)
+        end
 
-      it "logs in the user" do
-        subject.call
-
-        expect(warden).to have_received(:login).with(user)
+        it "logs in the user" do
+          expect(warden).to have_received(:login).with(user)
+        end
       end
     end
   end
 
   context "with invalid info" do
-    subject { Authentication::LoginWithOmniAuth.new(invalid_info, warden) }
+    subject do
+      Authentication::LoginWithOmniAuth.call(invalid_info, warden)
+        .on(:ok, &ok.spy)
+        .on(:fail, &fail.spy)
+    end
 
     it "doesn't create a new user" do
-      expect { subject.call }.not_to change(User, :count)
+      expect { subject }.not_to change(User, :count)
     end
 
-    it "publishes the :fail event" do
-      subject.call
+    describe "it also" do
+      before { subject }
 
-      expect(listener).to have_received(:fail)
-    end
+      it "publishes the :fail event" do
+        expect(fail).to be_called
+      end
 
-    it "doesn't log in the user" do
-      subject.call
+      it "doesn't log in the user" do
+        expect(warden).not_to have_received(:login)
+      end
 
-      expect(warden).not_to have_received(:login)
+      it "doesn't publish the :ok event" do
+        expect(ok).not_to be_called
+      end
     end
   end
 end

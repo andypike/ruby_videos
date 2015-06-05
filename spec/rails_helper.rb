@@ -6,6 +6,7 @@ require "rspec/rails"
 require "capybara/rails"
 require "capybara/rspec"
 require "sucker_punch/testing/inline"
+require "nala/rspec"
 
 require "support/page_objects/page_object"
 require "support/page_objects/page_object_with_form"

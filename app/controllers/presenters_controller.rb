@@ -19,10 +19,9 @@ class PresentersController < ApplicationController
   def create
     @form = Presenters::Form.build_from(:presenter, params)
 
-    Presenters::Create.new(@form)
+    Presenters::Create.call(@form)
       .on(:ok) { redirect_to presenters_path, :notice => t(:created_presenter) }
       .on(:fail) { render :new }
-      .call
   end
 
   def edit
@@ -35,9 +34,8 @@ class PresentersController < ApplicationController
   def update
     @form = Presenters::Form.build_from(:presenter, params)
 
-    Presenters::Update.new(@form)
+    Presenters::Update.call(@form)
       .on(:ok) { redirect_to presenters_path, :notice => t(:updated_presenter) }
       .on(:fail) { render :edit }
-      .call
   end
 end

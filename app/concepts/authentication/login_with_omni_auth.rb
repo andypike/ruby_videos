@@ -1,6 +1,6 @@
 module Authentication
   class LoginWithOmniAuth
-    include Wisper::Publisher
+    include Nala::Publisher
 
     attr_reader :info, :warden
 

@@ -1,9 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Videos::Update do
-  let(:listener) { spy }
-  let(:video)    { create(:video, :title => "All the little things") }
-  let(:form)     { Videos::Form.build_from(:video, params) }
+  let!(:video) { create(:video, :title => "All the little things") }
+  let(:form)   { Videos::Form.build_from(:video, params) }
   let(:params) do
     {
       :id => video.id,
@@ -18,19 +17,24 @@ RSpec.describe Videos::Update do
     }
   end
 
-  subject { Videos::Update.new(form) }
+  let(:ok)   { Nala::BlockSpy.new }
+  let(:fail) { Nala::BlockSpy.new }
 
-  before { subject.subscribe(listener) }
+  subject do
+    Videos::Update.call(form)
+      .on(:ok, &ok.spy)
+      .on(:fail, &fail.spy)
+  end
 
   context "with valid form" do
     let(:title) { "Overkill" }
 
     it "doesn't create a new video" do
-      expect { subject.call }.not_to change(Video, :count)
+      expect { subject }.not_to change(Video, :count)
     end
 
     describe "it also" do
-      before { subject.call }
+      before { subject }
 
       it "sets the video's attributes" do
         expect(video.reload).to have_attributes(
@@ -39,7 +43,11 @@ RSpec.describe Videos::Update do
       end
 
       it "publishes the :ok event" do
-        expect(listener).to have_received(:ok).with(video)
+        expect(ok).to be_called_with(video)
+      end
+
+      it "doesn't publish the :fail event" do
+        expect(fail).not_to be_called
       end
     end
   end
@@ -47,16 +55,20 @@ RSpec.describe Videos::Update do
   context "with invalid form" do
     let(:title) { "" }
 
-    it "publishes the :fail event" do
-      subject.call
-
-      expect(listener).to have_received(:fail)
-    end
+    before { subject }
 
     it "doesn't sets the video's attributes" do
       expect(video.reload).to have_attributes(
         :title  => "All the little things"
       )
+    end
+
+    it "publishes the :fail event" do
+      expect(fail).to be_called
+    end
+
+    it "doesn't publish the :ok event" do
+      expect(ok).not_to be_called
     end
   end
 end
