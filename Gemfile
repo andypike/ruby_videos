@@ -27,7 +27,7 @@ gem "unicorn"
 gem "font-awesome-rails"
 gem "redcarpet"
 gem "newrelic_rpm"
-gem "rollbar", "~> 1.4.4"
+gem "rollbar", "~> 1.5.3"
 gem "sucker_punch", "~> 1.0"
 
 group :development, :test do
