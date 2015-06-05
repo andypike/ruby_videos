@@ -23,10 +23,9 @@ class VideosController < ApplicationController
   def create
     @form = Videos::Form.build_from(:video, params)
 
-    Videos::Create.new(@form, current_user)
+    Videos::Create.call(@form, current_user)
       .on(:ok) { redirect_to videos_path, :notice => t(:created_video) }
       .on(:fail) { render :new }
-      .call
   end
 
   def edit
@@ -39,9 +38,8 @@ class VideosController < ApplicationController
   def update
     @form = Videos::Form.build_from(:video, params)
 
-    Videos::Update.new(@form)
+    Videos::Update.call(@form)
       .on(:ok) { redirect_to videos_path, :notice => t(:updated_video) }
       .on(:fail) { render :edit }
-      .call
   end
 end

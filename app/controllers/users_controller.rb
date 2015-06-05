@@ -10,9 +10,8 @@ class UsersController < ApplicationController
   def update
     @form = Users::EditProfileForm.build_from(:user, params)
 
-    Users::Update.new(@form, current_user)
+    Users::Update.call(@form, current_user)
       .on(:ok) { redirect_to edit_profile_path, :notice => t(:updated_profile) }
       .on(:fail) { render :edit }
-      .call
   end
 end

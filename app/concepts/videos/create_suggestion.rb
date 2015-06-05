@@ -1,6 +1,6 @@
 module Videos
   class CreateSuggestion
-    include Wisper::Publisher
+    include Nala::Publisher
 
     attr_reader :form, :user
 

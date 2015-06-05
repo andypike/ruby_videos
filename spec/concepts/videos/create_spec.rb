@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Videos::Create do
-  let(:listener)  { spy }
   let(:video)     { Video.first }
   let(:form)      { Videos::Form.build_from(:video, params) }
   let(:user)      { create(:user) }
@@ -19,19 +18,24 @@ RSpec.describe Videos::Create do
     }
   end
 
-  subject { Videos::Create.new(form, user) }
+  let(:ok)   { Nala::BlockSpy.new }
+  let(:fail) { Nala::BlockSpy.new }
 
-  before { subject.subscribe(listener) }
+  subject do
+    Videos::Create.call(form, user)
+      .on(:ok, &ok.spy)
+      .on(:fail, &fail.spy)
+  end
 
   context "with valid form" do
     let(:title) { "All the little things" }
 
     it "creates a new video" do
-      expect { subject.call }.to change(Video, :count).by(1)
+      expect { subject }.to change(Video, :count).by(1)
     end
 
     describe "it also" do
-      before { subject.call }
+      before { subject }
 
       it "sets the video's attributes" do
         expect(video).to have_attributes(
@@ -44,7 +48,11 @@ RSpec.describe Videos::Create do
       end
 
       it "publishes the :ok event" do
-        expect(listener).to have_received(:ok).with(video)
+        expect(ok).to be_called_with(video)
+      end
+
+      it "doesn't publish the :fail event" do
+        expect(fail).not_to be_called
       end
     end
   end
@@ -52,14 +60,20 @@ RSpec.describe Videos::Create do
   context "with invalid form" do
     let(:title) { "" }
 
-    it "publishes the :fail event" do
-      subject.call
-
-      expect(listener).to have_received(:fail)
+    it "doesn't create a new video" do
+      expect { subject }.not_to change(Video, :count)
     end
 
-    it "doesn't create a new video" do
-      expect { subject.call }.not_to change(Video, :count)
+    describe "it also" do
+      before { subject }
+
+      it "publishes the :fail event" do
+        expect(fail).to be_called
+      end
+
+      it "doesn't publish the :ok event" do
+        expect(ok).not_to be_called
+      end
     end
   end
 end

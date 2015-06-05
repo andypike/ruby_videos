@@ -1,9 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Presenters::Update do
-  let(:listener)  { spy }
-  let(:presenter) { create(:presenter, :name => "Bob Smith") }
-  let(:form)      { Presenters::Form.build_from(:presenter, params) }
+  let!(:presenter) { create(:presenter, :name => "Bob Smith") }
+  let(:form)       { Presenters::Form.build_from(:presenter, params) }
   let(:params) do
     {
       :id => presenter.id,
@@ -11,19 +10,24 @@ RSpec.describe Presenters::Update do
     }
   end
 
-  subject { Presenters::Update.new(form) }
+  let(:ok)   { Nala::BlockSpy.new }
+  let(:fail) { Nala::BlockSpy.new }
 
-  before { subject.subscribe(listener) }
+  subject do
+    Presenters::Update.call(form)
+      .on(:ok, &ok.spy)
+      .on(:fail, &fail.spy)
+  end
 
   context "with valid form" do
     let(:name) { "Andy" }
 
     it "doesn't create a new presenter" do
-      expect { subject.call }.not_to change(Presenter, :count)
+      expect { subject }.not_to change(Presenter, :count)
     end
 
     describe "it also" do
-      before { subject.call }
+      before { subject }
 
       it "sets the presenter's attributes" do
         expect(presenter.reload).to have_attributes(
@@ -32,7 +36,11 @@ RSpec.describe Presenters::Update do
       end
 
       it "publishes the :ok event" do
-        expect(listener).to have_received(:ok).with(presenter)
+        expect(ok).to be_called_with(presenter)
+      end
+
+      it "doesn't publish the :fail event" do
+        expect(fail).not_to be_called
       end
     end
   end
@@ -40,16 +48,20 @@ RSpec.describe Presenters::Update do
   context "with invalid form" do
     let(:name) { "" }
 
-    it "publishes the :fail event" do
-      subject.call
-
-      expect(listener).to have_received(:fail)
-    end
+    before { subject }
 
     it "doesn't sets the presenter's attributes" do
       expect(presenter.reload).to have_attributes(
         :name  => "Bob Smith"
       )
+    end
+
+    it "publishes the :fail event" do
+      expect(fail).to be_called
+    end
+
+    it "doesn't publish the :ok event" do
+      expect(ok).not_to be_called
     end
   end
 end

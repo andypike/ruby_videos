@@ -8,7 +8,6 @@ gem "coffee-rails",    "~> 4.1.0"
 gem "jquery-rails"
 gem "slim"
 gem "omniauth-github", "~> 1.1.2"
-gem "wisper"
 gem "simple_form_object",
   :github => "andypike/simple_form_object",
   :branch => "rails_4_2"
@@ -29,6 +28,7 @@ gem "redcarpet"
 gem "newrelic_rpm"
 gem "rollbar", "~> 1.5.3"
 gem "sucker_punch", "~> 1.0"
+gem "nala"
 
 group :development, :test do
   gem "web-console", "~> 2.0"
