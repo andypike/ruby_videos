@@ -3,8 +3,10 @@ class FormObject
 
   attribute :id, :integer
 
-  def self.build_from(key, params)
-    new(params[key]).tap do |f|
+  def self.build_from(key, params, additional_params = {})
+    attributes = params.fetch(key, {}).merge(additional_params)
+
+    new(attributes).tap do |f|
       f.id = params[:id]
     end
   end

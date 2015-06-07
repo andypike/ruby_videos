@@ -4,6 +4,7 @@ module Videos
 
     attribute :title, :string, :default => ""
     attribute :url,   :string, :default => ""
+    attribute :user,  User
 
     validates :title,
       :length   => { :maximum => 255 },
@@ -12,5 +13,8 @@ module Videos
     validates :url,
       :url    => true,
       :length => { :maximum => 255 }
+
+     validates :user,
+      :presence => true
   end
 end

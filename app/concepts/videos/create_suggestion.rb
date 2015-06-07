@@ -2,11 +2,10 @@ module Videos
   class CreateSuggestion
     include Nala::Publisher
 
-    attr_reader :form, :user
+    attr_reader :form
 
-    def initialize(form, user)
+    def initialize(form)
       @form = form
-      @user = user
     end
 
     def call
@@ -14,7 +13,6 @@ module Videos
         suggestion = Video.new(:suggestion => true)
 
         AutoMapper.new(form).map_to(suggestion).tap do |s|
-          s.user = user
           s.save!
 
           VideoMailer.suggestion(s).deliver_later

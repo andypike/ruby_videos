@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Videos::CreateSuggestion, :async => true do
   let(:video) { Video.first }
-  let(:form)  { Videos::SuggestionForm.build_from(:suggestion, params) }
+  let(:form)  { Videos::SuggestionForm.build_from(:suggestion, params, :user => user) }
   let(:user)  { create(:user) }
   let(:params) do
     {
@@ -17,7 +17,7 @@ RSpec.describe Videos::CreateSuggestion, :async => true do
   let(:fail) { Nala::BlockSpy.new }
 
   subject do
-    Videos::CreateSuggestion.call(form, user)
+    Videos::CreateSuggestion.call(form)
       .on(:ok, &ok.spy)
       .on(:fail, &fail.spy)
   end

@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Videos::SuggestionForm do
-  subject { described_class.build_from(:suggestion, params) }
+  subject { described_class.build_from(:suggestion, params, :user => user) }
 
+  let(:user) { build(:user) }
   let(:params) do
     {
       :suggestion => {
@@ -10,6 +11,12 @@ RSpec.describe Videos::SuggestionForm do
         :url   => "http://something.com/hello"
       }
     }
+  end
+
+  describe "mapping values" do
+    it "assigns the user" do
+      expect(subject.user).to eq(user)
+    end
   end
 
   describe "validation" do
@@ -46,6 +53,14 @@ RSpec.describe Videos::SuggestionForm do
 
       it "cannot be over 255 charaters in length" do
         subject.url = "http://#{'x' * 245}.com"
+
+        expect(subject).not_to be_valid
+      end
+    end
+
+    describe "#user" do
+      it "cannot be blank" do
+        subject.user = nil
 
         expect(subject).not_to be_valid
       end
