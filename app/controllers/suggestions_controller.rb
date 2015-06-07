@@ -4,9 +4,11 @@ class SuggestionsController < ApplicationController
   end
 
   def create
-    @form = Videos::SuggestionForm.build_from(:suggestion, params)
+    @form = Videos::SuggestionForm.build_from(:suggestion, params,
+      :user => current_user
+    )
 
-    Videos::CreateSuggestion.call(@form, current_user)
+    Videos::CreateSuggestion.call(@form)
       .on(:ok) { redirect_to videos_path, :notice => t(:created_suggestion) }
       .on(:fail) { render :new }
   end

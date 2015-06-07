@@ -21,9 +21,9 @@ class VideosController < ApplicationController
   end
 
   def create
-    @form = Videos::Form.build_from(:video, params)
+    @form = Videos::CreateForm.build_from(:video, params, :user => current_user)
 
-    Videos::Create.call(@form, current_user)
+    Videos::Create.call(@form)
       .on(:ok) { redirect_to videos_path, :notice => t(:created_video) }
       .on(:fail) { render :new }
   end

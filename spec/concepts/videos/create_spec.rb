@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Videos::Create do
   let(:video)     { Video.first }
-  let(:form)      { Videos::Form.build_from(:video, params) }
+  let(:form)      { Videos::CreateForm.build_from(:video, params, :user => user) }
   let(:user)      { create(:user) }
   let(:presenter) { create(:presenter) }
   let(:params) do
@@ -22,7 +22,7 @@ RSpec.describe Videos::Create do
   let(:fail) { Nala::BlockSpy.new }
 
   subject do
-    Videos::Create.call(form, user)
+    Videos::Create.call(form)
       .on(:ok, &ok.spy)
       .on(:fail, &fail.spy)
   end
@@ -39,7 +39,8 @@ RSpec.describe Videos::Create do
 
       it "sets the video's attributes" do
         expect(video).to have_attributes(
-          :title => "All the little things"
+          :title       => "All the little things",
+          :description => "something"
         )
       end
 

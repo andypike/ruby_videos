@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/andypike/simple_form_object.git
-  revision: 6dd695006336f3450ea9b267a6e0e33dffc49147
+  revision: e11d8e9ca4bb817fadda31269188ec4e7fbd6a68
   branch: rails_4_2
   specs:
     simple_form_object (0.0.5)
