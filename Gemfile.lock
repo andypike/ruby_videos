@@ -111,7 +111,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
-    cells (4.0.0.rc1)
+    cells (4.0.0)
       tilt (>= 1.4, < 3)
       uber (~> 0.0.9)
     celluloid (0.16.0)
@@ -376,7 +376,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0.3)
   capybara (~> 2.4.4)
   carrierwave
-  cells (~> 4.0.0.rc1)
+  cells (~> 4.0.0)
   cells-slim!
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)
